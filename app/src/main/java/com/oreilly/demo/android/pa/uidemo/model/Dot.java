@@ -3,8 +3,8 @@ package com.oreilly.demo.android.pa.uidemo.model;
 
 /** A dot: the coordinates, color and size. */
 public final class Dot {
-    private final float x, y;
-    private final int color;
+    private float x, y;
+    private int color;
     private final int diameter;
 
     /**
@@ -29,6 +29,15 @@ public final class Dot {
     /** @return the color. */
     public int getColor() { return color; }
 
+    public void setX(float x) { this.x = x; }
+
+    // setter method for y-coordinate
+    public void setY(float y) { this.y = y; }
+
     /** @return the dot diameter. */
     public int getDiameter() { return diameter; }
+
+    // setter method for color
+    public void setColor(int color) { this.color = color; }
+
 }

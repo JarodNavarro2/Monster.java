@@ -27,6 +27,7 @@ import com.oreilly.demo.android.pa.uidemo.view.DotView;
 public class TouchMe extends Activity {
     /** Dot diameter */
     public static final int DOT_DIAMETER = 6;
+    public static final int NUM_MONSTERS = 15;
 
     /** Listen for taps. */
     private static final class TrackingTouchListener implements View.OnTouchListener {
@@ -119,7 +120,16 @@ public class TouchMe extends Activity {
         dotView.setOnCreateContextMenuListener(this);
         dotView.setOnTouchListener(new TrackingTouchListener(dotModel));
 
-        dotView.setOnKeyListener((final View v, final int keyCode, final KeyEvent event) -> {
+        dotModel.setDotsChangeListener((final Dots dots) -> dotView.invalidate());
+
+        //create monsters
+        runOnUiThread(() -> {
+            for (int i = 0; i < NUM_MONSTERS; i++) {
+                makeDot(dotModel, dotView, Color.GREEN);
+            }
+        });
+
+        /*dotView.setOnKeyListener((final View v, final int keyCode, final KeyEvent event) -> {
             if (KeyEvent.ACTION_DOWN != event.getAction()) {
                 return false;
             }
@@ -139,15 +149,17 @@ public class TouchMe extends Activity {
             makeDot(dotModel, dotView, color);
 
             return true;
-        });
+        });*/
+
+
 
         // wire up the controller
-        findViewById(R.id.button1).setOnClickListener((final View v) ->
+        /*findViewById(R.id.button1).setOnClickListener((final View v) ->
             makeDot(dotModel, dotView, Color.RED)
         );
         findViewById(R.id.button2).setOnClickListener((final View v) ->
             makeDot(dotModel, dotView, Color.GREEN)
-        );
+        );*/
 
         final EditText tb1 = (EditText) findViewById(R.id.text1);
         final EditText tb2 = (EditText) findViewById(R.id.text2);
@@ -169,7 +181,11 @@ public class TouchMe extends Activity {
                 public void run() {
                     // must invoke makeDot on the UI thread to avoid
                     // ConcurrentModificationException on list of dots
-                    runOnUiThread(() -> makeDot(dotModel, dotView, Color.BLACK));
+                    runOnUiThread(() -> {
+                        moveDots(dotModel, dotView);
+                        makeDot(dotModel, dotView, Color.GREEN);
+                        changeColors(dotModel);
+                    });
                 }
             }, /*initial delay*/ 0, /*periodic delay*/ 2000);
         }
@@ -231,5 +247,23 @@ public class TouchMe extends Activity {
             DOT_DIAMETER + (rand.nextFloat() * (view.getHeight() - pad)),
             color,
             DOT_DIAMETER);
+    }
+    void moveDots(final Dots dots, final DotView view) {
+        final int pad = (DOT_DIAMETER + 2) * 2;
+        for (Dot dot : dots.getDots()) {
+            dot.setX(DOT_DIAMETER + (rand.nextFloat() * (view.getWidth() - pad)));
+            dot.setY(DOT_DIAMETER + (rand.nextFloat() * (view.getWidth() - pad)));
+        }
+    }
+
+    void changeColors(final Dots dots) {
+        for (Dot dot : dots.getDots()) {
+            Random rand = new Random();
+            if (rand.nextInt(2) == 0) {
+                dot.setColor(Color.YELLOW);
+            } else {
+                dot.setColor(Color.GREEN);
+            }
+        }
     }
 }
