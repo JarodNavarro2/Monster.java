@@ -1,8 +1,11 @@
 #What We Need to Do/ Responsibilities: 
 
 Responsibilities: 
+
 Rashan and Jarod: Monsters
+
 Nick and James: Gameboard
+
 Kyle and Grazyna: Testing Functions
 
 #TimeFrame: 
