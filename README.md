@@ -1,3 +1,22 @@
+#What We Need to Do/ Responsibilities: 
+
+Responsibilities: 
+Rashan and Jarod: Monsters
+Nick and James: Gameboard
+Kyle and Grazyna: Testing Functions
+
+#TimeFrame: 
+#Have Done by Fri, Dec 9: 
+- Monsters implemented and working
+- Game board and interactivity implemented and working
+#Have Done By Sunday, Dec 11:
+- Testing is almost done being implemented
+- Monsters and Game board are basically done, minor tweaks here at the there
+#Have Done by Tuesday, Dec 13: 
+- Supporting Documentation Done
+- App is complete and everything works
+
+
 # Overview
 
 This is a standalone Gradle-based version of the Dots/DotView/TouchMe MVC Android UI Demo from
