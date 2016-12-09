@@ -8,4 +8,4 @@ but the Monster setup will not run without them.
 
 *****strings.xml****** is the file that needs to be finished, as I completed color.
 
-Fill in the correct code for the strings under strings.xml and that part should work.
+Fill in the correct code for the strings under strings.xml and that part *should* work.
