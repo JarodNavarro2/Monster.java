@@ -1,0 +1,69 @@
+*Screen/field is locked into the preferred orientation 
+define below property to your activity inside manifest file, It will restrict your activity to portrait.
+
+android:screenOrientation="portrait"
+
+        <activity
+            android:name="com.example.demo_spinner.MainActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+        </activity>
+
+you should also explicitly declare that your application requires either portrait or landscape orientation with the element. For example, <uses-feature android:name="android.hardware.screen.portrait" />
+
+android:screenOrientation="portrait" 
+This will force your app to be portrait on both phones and tablets.
+
+You can have the app forced in the device's "preferred" orientation by using
+
+android:screenOrientation="nosensor"
+
+if(isTablet)
+{
+      setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);      
+}else
+{
+      setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+}
+
+
+ref: http://stackoverflow.com/questions/15718869/how-to-lock-android-apps-orientation-to-portrait-mode
+
+
+
+ <activity
+        android:name=".HomeActivity"
+        android:screenOrientation="landscape"/>
+
+ <activity
+        android:name=".MainActivity"
+        android:screenOrientation="portrait" />
+From the Developer.android you can read activity configuration
+
+ android:screenOrientation
+
+The orientation of the activity's display on the device.
+The value can be any one of the following strings:
+
+"unspecified"   The default value. The system chooses the orientation. The policy it uses, and therefore the choices made in specific contexts, may differ from device to device.
+"behind"    The same orientation as the activity that's immediately beneath it in the activity stack.
+"landscape" Landscape orientation (the display is wider than it is tall).
+"portrait"  Portrait orientation (the display is taller than it is wide).
+"reverseLandscape"  Landscape orientation in the opposite direction from normal landscape. Added in API level 9.
+"reversePortrait"   Portrait orientation in the opposite direction from normal portrait. Added in API level 9.
+"sensorLandscape"   Landscape orientation, but can be either normal or reverse landscape based on the device sensor. Added in API level 9.
+"sensorPortrait"    Portrait orientation, but can be either normal or reverse portrait based on the device sensor. Added in API level 9.
+"userLandscape" Landscape orientation, but can be either normal or reverse landscape based on the device sensor and the user's sensor preference. If the user has locked sensor-based rotation, this behaves the same as landscape, otherwise it behaves the same as sensorLandscape. Added in API level 18.
+"userPortrait"  Portrait orientation, but can be either normal or reverse portrait based on the device sensor and the user's sensor preference. If the user has locked sensor-based rotation, this behaves the same as portrait, otherwise it behaves the same as sensorPortrait. Added in API level 18.
+"sensor"    The orientation is determined by the device orientation sensor. The orientation of the display depends on how the user is holding the device; it changes when the user rotates the device. Some devices, though, will not rotate to all four possible orientations, by default. To allow all four orientations, use "fullSensor".
+"fullSensor"    The orientation is determined by the device orientation sensor for any of the 4 orientations. This is similar to "sensor" except this allows any of the 4 possible screen orientations, regardless of what the device will normally do (for example, some devices won't normally use reverse portrait or reverse landscape, but this enables those). Added in API level 9.
+"nosensor"  The orientation is determined without reference to a physical orientation sensor. The sensor is ignored, so the display will not rotate based on how the user moves the device. Except for this distinction, the system chooses the orientation using the same policy as for the "unspecified" setting.
+"user"  The user's current preferred orientation.
+"fullUser"  If the user has locked sensor-based rotation, this behaves the same as user, otherwise it behaves the same as fullSensor and allows any of the 4 possible screen orientations. Added in API level 18.
+"locked"    Locks the orientation to its current rotation, whatever that is. Added in API level 18.
+Note: When you declare one of the landscape or portrait values, it is considered a hard requirement for the orientation in which the activity runs. As such, the value you declare enables filtering by services such as Google Play so your application is available only to devices that support the orientation required by your activities. For example, if you declare either "landscape", "reverseLandscape", or "sensorLandscape", then your application will be available only to devices that support landscape orientation. However, you should also explicitly declare that your application requires either portrait or landscape orientation with the <uses-feature> element. For example, <uses-feature android:name="android.hardware.screen.portrait"/>. This is purely a filtering behavior provided by Google Play (and other services that support it) and the platform itself does not control whether your app can be installed when a device supports only certain orientations.
+
+ref: http://stackoverflow.com/questions/35883588/device-orientation-issue/35883608
+
+
+
