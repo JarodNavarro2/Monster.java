@@ -1,24 +1,3 @@
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.Timer;
-import java.util.TimerTask;
-
-import android.app.Activity;
-import android.graphics.Color;
-import android.os.Bundle;
-import android.view.ContextMenu;
-import android.view.KeyEvent;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.ContextMenu.ContextMenuInfo;
-import android.widget.EditText;
-
-import java.io.IOException;
-import java.util.Arrays;
-
 public String time = ""        // start time
 public String invul = "Green"; // present color: Green, Yelloe
 public int k = 0;              // monsters
