@@ -72,12 +72,12 @@ public class DotView extends View {
         //System.out.println("(dpHeight*dpWidth)/(n*m):"+(dpHeight*dpWidth)/(n*m));
         //System.out.println("each square should fill: 1/"+(n*m)+" of the screen.");
         //System.out.println("center of the screen(formula): ("+(dpHeight/2)+", "+(dpWidth/2)+")");
-        System.out.println("center of the screen(approx): ("+(getHeight()/2)+", "+(getWidth()/2)+")");
+        //System.out.println("center of the screen(approx): ("+(getHeight()/2)+", "+(getWidth()/2)+")");
         paint.setColor(Color.BLUE);
         //double root = Math.sqrt(n*m);
         int xSize =getWidth()/3;  //needs to be modified relative to dpWidth
         int ySize =getHeight()/3; //needs to be modified relative to dpHeight
-        System.out.println("xSize: "+xSize+"\nySize: "+ySize);
+        //System.out.println("xSize: "+xSize+"\nySize: "+ySize);
         //System.out.println("find point for box A, (x,y) format: ("+((getWidth()/2)-xSize)+", "+((getHeight()/2)-ySize)+")" );
         //paint.setStyle(Style.FILL_AND_STROKE);
         //paint.setColor(Color.GREEN);

@@ -1,10 +1,8 @@
 package com.oreilly.demo.android.pa.uidemo;
 
 import android.app.Activity;
-import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
@@ -106,7 +104,6 @@ public class TouchMe extends Activity {
                 final float p,
                 final float s) {
             dots.addDot(x, y, Color.CYAN, (int) ((p + 0.5) * (s + 0.5) * DOT_DIAMETER));
-            Monsters
         }
     }
 
