@@ -29,6 +29,16 @@ public class TouchMe extends Activity {
     /** Dot diameter */
     public static final int DOT_DIAMETER = 5;//min size must be 5 or so...
     public static final int NUM_MONSTERS = 15;
+    public String time = "";        // start time
+    public String invul = "Green"; // present color: Green, Yelloe
+    public int k = 0;              // monsters
+    public int x = 0;              // lives
+    public int ticks = 0;          // ticks left
+    public boolean FoE = false;       // Fell off left edge, out of bounds
+    //public int Ax, Ay, Bx, By, Cx, Cy, Dx, Dy, Ex, Ey, Fx, Fy, Gx, Gy, Hx, Hy;  // positioning
+    //Ax =0; Ay=0; Bx = 0; By=0; Cx =0; Cy =0; Dx =0; Dy =0; Ex =0; Ey =0; Fx =0; Fy =0; Gx =0; Gy =0; Hx =0; Hy =0;
+    public Object[][][][][][][] Monsters = new Object[][][][][][][];   // Array: k, time, Color, xCoord, yCoord, x, ticks
+    //                 1=Green, 2=Yellow
 
     /** Listen for taps. */
     private static final class TrackingTouchListener implements View.OnTouchListener {
@@ -93,6 +103,7 @@ public class TouchMe extends Activity {
                 final float p,
                 final float s) {
             dots.addDot(x, y, Color.CYAN, (int) ((p + 0.5) * (s + 0.5) * DOT_DIAMETER));
+            Monsters
         }
     }
 
@@ -249,7 +260,7 @@ public class TouchMe extends Activity {
      * @param view the view in which we're drawing dots
      * @param color the color of the dot
      */
-    void makeDot(final Dots dots, final DotView view, final int color) {
+    void makeDot(final Dots dots, final DotView view, final int color) { //// TODO: making of "Monsters" v1
         final int pad = (DOT_DIAMETER + 2) * 2;
         dots.addDot(
             DOT_DIAMETER + (rand.nextFloat() * (view.getWidth() - pad)),
