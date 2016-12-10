@@ -67,27 +67,30 @@ default:
 
 public void PopBoard(){   
 //Populate Board (array) & check clocks            //<----------- ***///
-        Currtime =        // grabs current time to compare to ticks/ ticks+time.//<----------- ***///
+        Currtime = System.currentTimeMillis();       // grabs current time to compare to ticks/ ticks+time.//<----------- ***///
         for i = 0 to *(Monsters.length){
-        //k = Monsters[i][0];
+        //k = Monsters[i][0]; //Monster ID
         time = Monsters[i][1];
         ticks = Monsters[i][6];
         Color = Monsters[i][2];   // Color Flip?   1=Green, 2=Yellow
-        x = Monsters[i][5];       //x
+        x = Monsters[i][5];       //x (lives)
+        //Monsters[i][3], Monsters[i][4] store the xCoord, yCoord of a monster, respectively.
 
         if ticks > 0 {
            ticks --;
         } else {
-           if (color < 3) {
-
-           }
+           ticks= new Random().nextInt(61-5)+5;
         };
+        if (time == 0)
+        {
+            time = int()Currtime;
+        }
 
 
-        Monsters[i][2] = Color;    // Color Flip?   1=Green, 2=Yellow
+        Monsters[i][2] = new Random().nextInt(3-1)+1;    // Color Flip?   1=Green, 2=Yellow
         Monsters[i][3] = new Random().nextInt(dpWidth - DOT_DIAMETER) + DOT_DIAMETER;  // xCoord
         Monsters[i][4] = new Random().nextInt(dpHeight - DOT_DIAMETER) + DOT_DIAMETER;  // yCoord
-        Monsters[i][5] =       ;   //x
+        Monsters[i][5] =  3;   //x (Lives) ...temporarily set to 3.
         Monsters[i][6] = ticks;
         };
 

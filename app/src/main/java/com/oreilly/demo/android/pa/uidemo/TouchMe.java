@@ -37,22 +37,28 @@ public class TouchMe extends Activity {
     private static final class TrackingTouchListener implements View.OnTouchListener {
         private final Dots mDots;
         private List<Integer> tracks = new ArrayList<>();
-        public static final ArrayList<Integer> RectArray= new ArrayList<Integer>(); //TODO each 4 vals contains edge vals of boxes.
+        //public static final ArrayList<Integer> RectArray= new ArrayList<Integer>(); //TODO each 4 vals contains edge vals of boxes.
         TrackingTouchListener(final Dots dots) { mDots = dots; }
 
         @Override public boolean onTouch(final View v, final MotionEvent evt) {
             final int action = evt.getAction();
+            final float touchX=evt.getX();
+            final float touchY=evt.getY();
+            System.out.println("Location of touch (x,y): ("+touchX+","+touchY+")");
+            //Android graphics and touch events, also getX,getY for touched area     TODO <------------
             switch (action & MotionEvent.ACTION_MASK) {
                 case MotionEvent.ACTION_DOWN:
+                    //TODO this is where we could define the monster being clicked...
                 case MotionEvent.ACTION_POINTER_DOWN:
+
                     final int idx1 = (action & MotionEvent.ACTION_POINTER_INDEX_MASK)
-                        >> MotionEvent.ACTION_POINTER_INDEX_SHIFT;
+                            >> MotionEvent.ACTION_POINTER_INDEX_SHIFT;
                     tracks.add(evt.getPointerId(idx1));
                     break;
 
                 case MotionEvent.ACTION_POINTER_UP:
                     final int idx2 = (action & MotionEvent.ACTION_POINTER_INDEX_MASK)
-                        >> MotionEvent.ACTION_POINTER_INDEX_SHIFT;
+                            >> MotionEvent.ACTION_POINTER_INDEX_SHIFT;
                     tracks.remove(evt.getPointerId(idx2));
                     break;
 
@@ -61,19 +67,17 @@ public class TouchMe extends Activity {
                     for (Integer i: tracks) {
                         final int idx = evt.findPointerIndex(i);
                         for (int j = 0; j < n; j++) {
-                            addDot(
-                                mDots,
-                                evt.getHistoricalX(idx, j),
-                                evt.getHistoricalY(idx, j),
-                                evt.getHistoricalPressure(idx, j),
-                                evt.getHistoricalSize(idx, j));
+                            addDot( mDots, evt.getHistoricalX(idx, j), evt.getHistoricalY(idx, j),
+                                    evt.getHistoricalPressure(idx, j), evt.getHistoricalSize(idx, j));
                         }
                     }
                     break;
 
-
                 default:
-                    return false;
+                    // MotionEvent class provides many methods to query the position and other properties of pointers, such as getX(int), getY(int), getAxisValue(int), getPointerId(int), getToolType(int)
+                    // identify View was touched & getX, getY  <--------------------------------TODO
+                    //return super.onTouchEvent(evt); //evt.getActionIndex(); ?
+                return false;
             }
 
             for (final Integer i: tracks) {
