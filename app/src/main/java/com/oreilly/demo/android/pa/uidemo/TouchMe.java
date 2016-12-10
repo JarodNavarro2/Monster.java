@@ -1,39 +1,40 @@
 package com.oreilly.demo.android.pa.uidemo;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.Timer;
-import java.util.TimerTask;
-
 import android.app.Activity;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.ContextMenu;
-import android.view.KeyEvent;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.EditText;
 
 import com.oreilly.demo.android.pa.uidemo.model.Dot;
 import com.oreilly.demo.android.pa.uidemo.model.Dots;
 import com.oreilly.demo.android.pa.uidemo.view.DotView;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
+
 
 /** Android UI demo program */
 public class TouchMe extends Activity {
     /** Dot diameter */
-    public static final int DOT_DIAMETER = 6;
+    public static final int DOT_DIAMETER = 5;//min size must be 5 or so...
     public static final int NUM_MONSTERS = 15;
 
     /** Listen for taps. */
     private static final class TrackingTouchListener implements View.OnTouchListener {
         private final Dots mDots;
         private List<Integer> tracks = new ArrayList<>();
-
+        public static final ArrayList<Integer> RectArray= new ArrayList<Integer>(); //TODO each 4 vals contains edge vals of boxes.
         TrackingTouchListener(final Dots dots) { mDots = dots; }
 
         @Override public boolean onTouch(final View v, final MotionEvent evt) {
@@ -112,6 +113,14 @@ public class TouchMe extends Activity {
 
         // install the view
         setContentView(R.layout.main);
+        DisplayMetrics displayMetrics = Resources.getSystem().getDisplayMetrics();
+        int dpHeight = (int)(displayMetrics.heightPixels / displayMetrics.density + 0.5);
+        int dpWidth = (int)(displayMetrics.widthPixels / displayMetrics.density + 0.5);
+        int n=9;
+        int m=1;
+        System.out.println("(dpHeight*dpWidth)/(n*m):"+(dpHeight*dpWidth)/(n*m)+ "\ndpHeight"+dpHeight+"\ndpWidth"+dpWidth);
+        System.out.println("each square should fill: 1/"+(n*m)+" of the screen.");
+
 
         // find the dots view
         dotView = (DotView) findViewById(R.id.dots);

@@ -12,9 +12,12 @@ public Object[][][][][][][] Monsters;   // Array: k, time, Color, xCoord, yCoord
 public static void main()
 
    // What's our screen size?
-   DisplayMetrics displayMetrics = Resources.getSystem().getDisplayMetrics();
-   int dpHeight = (int)(displayMetrics.heightPixels / displayMetrics.density + 0.5);
-   int dpWidth = (int)(displayMetrics.widthPixels / displayMetrics.density + 0.5);
+        DisplayMetrics displayMetrics = Resources.getSystem().getDisplayMetrics();
+        int dpHeight = (int)(displayMetrics.heightPixels / displayMetrics.density + 0.5);
+        int dpWidth = (int)(displayMetrics.widthPixels / displayMetrics.density + 0.5);
+        int n=9;
+        int m=1;
+        System.out.println("(dpHeight*dpWidth)/(n*m):"+(dpHeight*dpWidth)/(n*m));
    //ex. 576h x 320w    **Flip phone sideways?  if time permits <------------------TODO
 
    /** Dot diameter */
