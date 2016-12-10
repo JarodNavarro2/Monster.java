@@ -92,6 +92,8 @@ public void PopBoard(){
         Monsters[i][4] = new Random().nextInt(dpHeight - DOT_DIAMETER) + DOT_DIAMETER;  // yCoord
         Monsters[i][5] =  3;   //x (Lives) ...temporarily set to 3.
         Monsters[i][6] = ticks;
+        // TODO: for Monsters[i][3], Monsters[i][4], make sure monster appears within the limits of the display,
+        //and if possible, limit so that only one monster can be in a display at any time.
         };
 
 public void DrawBoard(){
