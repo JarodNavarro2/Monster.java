@@ -37,8 +37,11 @@ public class TouchMe extends Activity {
     public boolean FoE = false;       // Fell off left edge, out of bounds
     //public int Ax, Ay, Bx, By, Cx, Cy, Dx, Dy, Ex, Ey, Fx, Fy, Gx, Gy, Hx, Hy;  // positioning
     //Ax =0; Ay=0; Bx = 0; By=0; Cx =0; Cy =0; Dx =0; Dy =0; Ex =0; Ey =0; Fx =0; Fy =0; Gx =0; Gy =0; Hx =0; Hy =0;
-    public Object[][][][][][][] Monsters = new Object[][][][][][][];   // Array: k, time, Color, xCoord, yCoord, x, ticks
-    //                 1=Green, 2=Yellow
+    public Object[][][][][][][] Monsters;   // Array: k, time, Color, xCoord, yCoord, x, ticks //TODO this could be the end result object
+    //this could contain the monster ID  (number used to find the correct monster), xCoord, yCoord, num of lives, color (stored as 0 or 1 for yellow, green),
+    // refresh rate (how often monster moves, changes state), and when the monster was originally created (labeled startTime).
+    // startTime is a long converted to an integer (originally System.currentTimeMillis() for when the monster was created)
+    // that is used to compare against the current Time (using System.currentTimeMillis()). if currentTime-(startTime)%(mod by the) refresh rate is 0, move the monster.
 
     /** Listen for taps. */
     private static final class TrackingTouchListener implements View.OnTouchListener {
@@ -124,13 +127,13 @@ public class TouchMe extends Activity {
 
         // install the view
         setContentView(R.layout.main);
-        DisplayMetrics displayMetrics = Resources.getSystem().getDisplayMetrics();
+        /*DisplayMetrics displayMetrics = Resources.getSystem().getDisplayMetrics();
         int dpHeight = (int)(displayMetrics.heightPixels / displayMetrics.density + 0.5);
         int dpWidth = (int)(displayMetrics.widthPixels / displayMetrics.density + 0.5);
         int n=9;
         int m=1;
         System.out.println("(dpHeight*dpWidth)/(n*m):"+(dpHeight*dpWidth)/(n*m)+ "\ndpHeight"+dpHeight+"\ndpWidth"+dpWidth);
-        System.out.println("each square should fill: 1/"+(n*m)+" of the screen.");
+        System.out.println("each square should fill: 1/"+(n*m)+" of the screen.");*/
 
 
         // find the dots view
@@ -146,6 +149,7 @@ public class TouchMe extends Activity {
         runOnUiThread(() -> {
             for (int i = 0; i < NUM_MONSTERS; i++) {
                 makeDot(dotModel, dotView, Color.GREEN);
+                //Monsters.add(); TODO this is where we could add the monster...
             }
         });
 
