@@ -153,7 +153,7 @@ public class DotView extends View {
             //print middles
             canvas.drawRect((placeX-25),(placeY-25), (placeX+25),(placeY+25), paint);//TODO a"Monster" positioning example...(Read notes just below)
             //make the monster appear based on placeX, placeY positioning. for the start points,
-            // -(1/2) of the monster's width and height. For teh end points, + (1/2) of monster's width, height.
+            // -(1/2) of the monster's width and height. For the end points, + (1/2) of monster's width, height.
             //this positions the center of the omnster in the center of the rectangle.
 
             System.out.println("middle pair of Rect: "+Coord[j][4]+","+Coord[j][5]);
