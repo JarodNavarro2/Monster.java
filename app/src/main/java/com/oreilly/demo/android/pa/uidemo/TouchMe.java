@@ -26,12 +26,16 @@ import java.util.TimerTask;
 public class TouchMe extends Activity {
     /** Dot diameter */
     public static final int DOT_DIAMETER = 5;//min size must be 5 or so...
-    //public Object[][][][][][][] Monsters;  //TODO this could be the end result object to contain the Monsters
+    public Integer[][]Monsters;  //TODO this could be the end result object to contain the Monsters EDIT: originally 7d, now 2d.
+    public Long[][]Monster_StartTimes;  //TODO this could be the end result object to contain the Monsters EDIT: originally 7d, now 2d.
     // Array: (monster number, or some int k), startTime, Color, xCoord, yCoord, x (num of lives), ticks/refresh
     //this could contain the monster ID  (number used to find the correct monster), xCoord, yCoord, num of lives, color (stored as 0 or 1 for yellow, green),
     // refresh rate (how often monster moves, changes state), and when the monster was originally created (labeled startTime).
     // startTime is a long converted to an integer (originally System.currentTimeMillis() for when the monster was created)
     // that is used to compare against the current Time (using System.currentTimeMillis()). if currentTime-(startTime)%(mod by the) refresh rate is 0, move the monster.
+    public static Integer dpWidth =0;
+    public static Integer dpHeight=0;
+
 
     /** Listen for taps. */
     private static final class TrackingTouchListener implements View.OnTouchListener {
@@ -178,7 +182,9 @@ public class TouchMe extends Activity {
         findViewById(R.id.button2).setOnClickListener((final View v) ->
             makeDot(dotModel, dotView, Color.GREEN)
         );*/
-
+        System.out.println("Testing PopBoard(Monsters)...");
+        PopBoard();
+        System.out.println("Testing complete.");
         final EditText tb1 = (EditText) findViewById(R.id.text1);
         final EditText tb2 = (EditText) findViewById(R.id.text2);
         dotModel.setDotsChangeListener((final Dots dots) -> {
@@ -284,5 +290,49 @@ public class TouchMe extends Activity {
                 dot.setColor(Color.GREEN);
             }
         }
+    }
+    public void PopBoard() {
+//Populate Board (array) & check clocks            //<----------- ***///
+        long Currtime = System.currentTimeMillis();       // grabs current time to compare to ticks/ ticks+time.//<----------- ***///
+        int i = 0;
+        Integer k, ticks, Color, lives, xCoord, yCoord;
+        Long time;
+        //example monster...
+        Monsters[0][0] = 1;//ID
+        Monster_StartTimes[0][0] = System.currentTimeMillis();//time
+        Monsters[0][1] = 1;//color
+        Monsters[0][2] = 130;//x
+        Monsters[0][3] = 33;//y
+        Monsters[0][4] = 3; //3 lives
+        Monsters[0][5] = 2;
+        //
+        for (i = 0; i < Monsters.length; i++) {
+            k = Monsters[i][0]; //Monster ID
+            time = Monster_StartTimes[i][0];
+            ticks = Monsters[i][6];
+            Color = Monsters[i][2];   // Color Flip?   1=Green, 2=Yellow
+            //int lives = Monsters[i][5];       //x (lives)
+            //Monsters[i][3], Monsters[i][4] store the xCoord, yCoord of a monster, respectively.
+
+            if (ticks > 0) {
+                ticks--;
+            } else {
+                ticks = new Random().nextInt(61 - 5) + 5;
+            }
+            ;
+            if (time == 0) {
+                time = Currtime;
+            }
+
+
+            Monsters[i][2] = new Random().nextInt(3 - 1) + 1;    // Color Flip?   1=Green, 2=Yellow
+            Monsters[i][3] = new Random().nextInt(dpWidth - DOT_DIAMETER) + DOT_DIAMETER;  // xCoord
+            Monsters[i][4] = new Random().nextInt(dpHeight - DOT_DIAMETER) + DOT_DIAMETER;  // yCoord
+            Monsters[i][5] = 3;   //x (Lives) ...temporarily set to 3.
+            Monsters[i][6] = ticks;
+            // TODO: for Monsters[i][3], Monsters[i][4], make sure monster appears within the limits of the display,
+            //and if possible, limit so that only one monster can be in a display at any time.
+        }
+        ;
     }
 }

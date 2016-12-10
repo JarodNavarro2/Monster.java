@@ -1,15 +1,20 @@
 package com.oreilly.demo.android.pa.uidemo.view;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.util.AttributeSet;
+import android.util.DisplayMetrics;
 import android.view.View;
 
 import com.oreilly.demo.android.pa.uidemo.model.Dot;
 import com.oreilly.demo.android.pa.uidemo.model.Dots;
+
+import static com.oreilly.demo.android.pa.uidemo.TouchMe.dpHeight;
+import static com.oreilly.demo.android.pa.uidemo.TouchMe.dpWidth;
 
 
 /**
@@ -63,10 +68,12 @@ public class DotView extends View {
         paint.setStyle(Style.STROKE);
         paint.setColor(hasFocus() ? Color.BLUE : Color.GRAY);
         canvas.drawRect(0, 0, getWidth() - 1, getHeight() -1, paint);
-        //
-        //DisplayMetrics displayMetrics = Resources.getSystem().getDisplayMetrics();
-        //int dpHeight = (int)(displayMetrics.heightPixels / displayMetrics.density + 0.5);
-        //int dpWidth = (int)(displayMetrics.widthPixels / displayMetrics.density + 0.5);
+
+        DisplayMetrics displayMetrics = Resources.getSystem().getDisplayMetrics();
+        //dpHeight = (int)(displayMetrics.heightPixels / displayMetrics.density + 0.5);
+        //dpWidth = (int)(displayMetrics.widthPixels / displayMetrics.density + 0.5);
+        dpHeight =getWidth() ;
+        dpWidth = getHeight() ;
         //int n=9;
         //int m=1;
         //System.out.println("(dpHeight*dpWidth)/(n*m):"+(dpHeight*dpWidth)/(n*m));
@@ -151,7 +158,7 @@ public class DotView extends View {
             Coord[j][4]=placeX;
             Coord[j][5]=placeY;
             //print middles
-            canvas.drawRect((placeX-25),(placeY-25), (placeX+25),(placeY+25), paint);//TODO a"Monster" positioning example...(Read notes just below)
+            //canvas.drawRect((placeX-25),(placeY-25), (placeX+25),(placeY+25), paint);//TODO a"Monster" positioning example...(Read notes just below)
             //make the monster appear based on placeX, placeY positioning. for the start points,
             // -(1/2) of the monster's width and height. For the end points, + (1/2) of monster's width, height.
             //this positions the center of the omnster in the center of the rectangle.
@@ -195,6 +202,7 @@ public class DotView extends View {
         if (null == dots) { return; }
 
         paint.setStyle(Style.FILL);
+        //TODO put popBoard  here.?
         for (final Dot dot : dots.getDots()) {
             paint.setColor(dot.getColor());
             canvas.drawCircle(
