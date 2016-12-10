@@ -21,6 +21,11 @@ are there.
 box easily, as per instructions. 
 
 --I could not get the spawning of the initial monsters working correctly yet.
+-Got the grid up and working, and have relative positioning for the monsters. written down.
+
+Working on coding the relative positioning, making sure the monster size is correct, and
+
+storing monster vals into an array.
 *******************************************************************************************
 
 Possible pseudocode/format for combining the different aspects of the program.
@@ -29,7 +34,7 @@ Possible pseudocode/format for combining the different aspects of the program.
 
 I believe we should use an central array repository for holding the Monsters. 
 if you check my main.java under the AndroidStudioProjects\cs313f16p5-project-5\jk_update
-folder, I use an Object [][][][][][][] array Monsters. 
+folder, I use an Object [][][][][][][]/ Object [][] array Monsters.
 
 This could contain the monster ID (to better call or sort them), the x,y,coordinates,
 the number of lives, the color, the period/refresh rate, and creation time.
@@ -53,6 +58,9 @@ Just apply to a foreach monster in Monsters loop, and you have most of the
 
 monster/screen refresh code.
 
+--NOTE--
+in either case-7d/2d arrays- the first val with be the monster number. For 2d, the second contains everything else.
+for 7d, each item is saves in one slot.
 
 MonsterGrid is a visio to help better show the flow from what I saw thus far.
 worst case, split the setup into 2 threads.
