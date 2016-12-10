@@ -26,16 +26,8 @@ import java.util.TimerTask;
 public class TouchMe extends Activity {
     /** Dot diameter */
     public static final int DOT_DIAMETER = 5;//min size must be 5 or so...
-    public static final int NUM_MONSTERS = 15;
-    public String time = "";        // start time
-    public String invul = "Green"; // present color: Green, Yelloe
-    public int k = 0;              // monsters
-    public int x = 0;              // lives
-    public int ticks = 0;          // ticks left
-    public boolean FoE = false;       // Fell off left edge, out of bounds
-    //public int Ax, Ay, Bx, By, Cx, Cy, Dx, Dy, Ex, Ey, Fx, Fy, Gx, Gy, Hx, Hy;  // positioning
-    //Ax =0; Ay=0; Bx = 0; By=0; Cx =0; Cy =0; Dx =0; Dy =0; Ex =0; Ey =0; Fx =0; Fy =0; Gx =0; Gy =0; Hx =0; Hy =0;
-    public Object[][][][][][][] Monsters;   // Array: k, time, Color, xCoord, yCoord, x, ticks //TODO this could be the end result object
+    //public Object[][][][][][][] Monsters;  //TODO this could be the end result object to contain the Monsters
+    // Array: (monster number, or some int k), startTime, Color, xCoord, yCoord, x (num of lives), ticks/refresh
     //this could contain the monster ID  (number used to find the correct monster), xCoord, yCoord, num of lives, color (stored as 0 or 1 for yellow, green),
     // refresh rate (how often monster moves, changes state), and when the monster was originally created (labeled startTime).
     // startTime is a long converted to an integer (originally System.currentTimeMillis() for when the monster was created)
@@ -143,8 +135,9 @@ public class TouchMe extends Activity {
         dotModel.setDotsChangeListener((final Dots dots) -> dotView.invalidate());
 
         //create monsters
+        //num_monsters cannot be found...so gonna temporarily set this to 15.
         runOnUiThread(() -> {
-            for (int i = 0; i < NUM_MONSTERS; i++) {
+            for (int i = 0; i < 15; i++) {
                 makeDot(dotModel, dotView, Color.GREEN);
                 //Monsters.add(); TODO this is where we could add the monster...
             }
@@ -268,6 +261,7 @@ public class TouchMe extends Activity {
             DOT_DIAMETER + (rand.nextFloat() * (view.getHeight() - pad)),
             color,
             DOT_DIAMETER);
+        //TODO or Monster can be added here.
     }
     void moveDots(final Dots dots, final DotView view) {
         final int pad = (DOT_DIAMETER + 2) * 2;

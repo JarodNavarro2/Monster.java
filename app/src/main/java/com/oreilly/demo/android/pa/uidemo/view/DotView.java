@@ -79,26 +79,26 @@ public class DotView extends View {
         int ySize =getHeight()/3; //needs to be modified relative to dpHeight
         //System.out.println("xSize: "+xSize+"\nySize: "+ySize);
         //System.out.println("find point for box A, (x,y) format: ("+((getWidth()/2)-xSize)+", "+((getHeight()/2)-ySize)+")" );
-        //paint.setStyle(Style.FILL_AND_STROKE);
-        //paint.setColor(Color.GREEN);
+        paint.setStyle(Style.FILL_AND_STROKE);
+        paint.setColor(Color.GREEN);
         canvas.drawRect(0, 0, xSize,ySize, paint);    //assume 9 boxes (8 surrounding 1 box)
-        //paint.setColor(Color.YELLOW);
+        paint.setColor(Color.YELLOW);
         canvas.drawRect(xSize, 0, (xSize*2),(ySize*1), paint); //next one horizontally.
-        //paint.setColor(Color.GREEN);
+        paint.setColor(Color.GREEN);
         canvas.drawRect((xSize*2),0, (xSize*3),(ySize*1), paint);//final one horizontally
         //repeat for next row.
-        //paint.setColor(Color.YELLOW);
+        paint.setColor(Color.YELLOW);
         canvas.drawRect(0, (ySize), xSize,(ySize*2), paint);    //assume 9 boxes (8 surrounding 1 box)
-        //paint.setColor(Color.GREEN);
+        paint.setColor(Color.GREEN);
         canvas.drawRect(xSize, (ySize), (xSize*2),(ySize*2), paint); //next one horizontally.
-        //paint.setColor(Color.YELLOW);
+        paint.setColor(Color.YELLOW);
         canvas.drawRect((xSize*2),(ySize), (xSize*3),(ySize*2), paint);//final one horizontally
         //repeat for final row.
-        //paint.setColor(Color.GREEN);
+        paint.setColor(Color.GREEN);
         canvas.drawRect(0, (ySize*2), xSize,(ySize*3), paint);    //assume 9 boxes (8 surrounding 1 box)
-        //paint.setColor(Color.YELLOW);
+        paint.setColor(Color.YELLOW);
         canvas.drawRect(xSize, (ySize*2), (xSize*2),(ySize*3), paint); //next one horizontally.
-        //paint.setColor(Color.GREEN);
+        paint.setColor(Color.GREEN);
         canvas.drawRect((xSize*2),(ySize*2), (xSize*3),(ySize*3), paint);//final one horizontally
         //
         //FORMULA: (getHeight()/(root))-(getHeight()/(root))  code to break down. //rect is 1/ sqrt(n*m) of the screen... if there are n*m squares.
