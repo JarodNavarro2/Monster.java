@@ -183,7 +183,8 @@ public class TouchMe extends Activity {
             makeDot(dotModel, dotView, Color.GREEN)
         );*/
         System.out.println("Testing PopBoard(Monsters)...");
-        PopBoard();
+        PopBoard();//TODO: @npredey...this routine is a good portion of what needs to be done to initialize the monsters on the screen. Get this working and the ability to see if the user touched a monster, then our part of the project at this stage is done.
+
         System.out.println("Testing complete.");
         final EditText tb1 = (EditText) findViewById(R.id.text1);
         final EditText tb2 = (EditText) findViewById(R.id.text2);
@@ -297,7 +298,7 @@ public class TouchMe extends Activity {
         int i = 0;
         Integer k, ticks, Color, lives, xCoord, yCoord;
         Long time;
-        //example monster...
+        //TODO example monster...this is where I last saw an error.
         Monsters[0][0] = 1;//ID
         Monster_StartTimes[0][0] = System.currentTimeMillis();//time
         Monsters[0][1] = 1;//color
@@ -305,7 +306,10 @@ public class TouchMe extends Activity {
         Monsters[0][3] = 33;//y
         Monsters[0][4] = 3; //3 lives
         Monsters[0][5] = 2;
-        //
+        //prints out one instance of monster.
+        System.out.println("Monsters[0][0]: "+Monsters[0][0] +"\nMonster_StartTimes[0][0]: "+Monster_StartTimes[0][0]+"\nMonsters[0][1]: "+
+                Monsters[0][1]+"\nMonsters[0][2]: "+ Monsters[0][2]+"\nMonsters[0][3]: "+ Monsters[0][3] +"\nMonsters[0][4]: "+Monsters[0][4] +"\nMonsters[0][5]: "+Monsters[0][5]);
+        //start loop.
         for (i = 0; i < Monsters.length; i++) {
             k = Monsters[i][0]; //Monster ID
             time = Monster_StartTimes[i][0];
