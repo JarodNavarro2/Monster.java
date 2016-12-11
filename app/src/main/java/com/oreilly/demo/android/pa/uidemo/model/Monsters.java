@@ -11,7 +11,7 @@ public class Monsters {
 
     /** DotChangeListener. */
     public interface MonstersChangeListener {
-        /** @param dots the dots that changed. */
+        /** @param monsters the dots that changed. */
         void onDotsChange(Monsters monsters);
     }
 
