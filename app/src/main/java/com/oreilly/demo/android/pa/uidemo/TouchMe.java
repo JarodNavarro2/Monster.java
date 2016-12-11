@@ -10,11 +10,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.EditText;
 
-import com.oreilly.demo.android.pa.uidemo.model.Dot;
-import com.oreilly.demo.android.pa.uidemo.model.Dots;
+import com.oreilly.demo.android.pa.uidemo.model.Monster;
+import com.oreilly.demo.android.pa.uidemo.model.Monsters;
 import com.oreilly.demo.android.pa.uidemo.view.DotView;
 
 import java.util.ArrayList;
@@ -41,10 +40,12 @@ public class TouchMe extends Activity {
 
     /** Listen for taps. */
     private static final class TrackingTouchListener implements View.OnTouchListener {
-        private final Dots mDots;
+        private final Monsters mMonsters;
         private List<Integer> tracks = new ArrayList<>();
         //public static final ArrayList<Integer> RectArray= new ArrayList<Integer>(); //TODO each 4 vals contains edge vals of boxes.
-        TrackingTouchListener(final Dots dots) { mDots = dots; }
+        TrackingTouchListener(final Monsters monsters) { mMonsters = monsters; }
+
+
 
         @Override public boolean onTouch(final View v, final MotionEvent evt) {
             final int action = evt.getAction();
@@ -84,16 +85,17 @@ public class TouchMe extends Activity {
                     tracks.remove(evt.getPointerId(idx2));
                     break;
 
-                case MotionEvent.ACTION_MOVE:
+                //we shouldn't need this case because we do not care about the moving of the event
+                /*case MotionEvent.ACTION_MOVE:
                     final int n = evt.getHistorySize();
                     for (Integer i: tracks) {
                         final int idx = evt.findPointerIndex(i);
                         for (int j = 0; j < n; j++) {
-                            addDot( mDots, evt.getHistoricalX(idx, j), evt.getHistoricalY(idx, j),
+                            /*addDot( mDots, evt.getHistoricalX(idx, j), evt.getHistoricalY(idx, j),
                                     evt.getHistoricalPressure(idx, j), evt.getHistoricalSize(idx, j));
                         }
                     }
-                    break;
+                    break;*/
 
                 default:
                     // MotionEvent class provides many methods to query the position and other properties of pointers, such as getX(int), getY(int), getAxisValue(int), getPointerId(int), getToolType(int)
@@ -102,33 +104,35 @@ public class TouchMe extends Activity {
                 return false;
             }
 
-            for (final Integer i: tracks) {
+            //also should not need this code. I kept it just in case, but again, this is tracking
+            //the pointer, something we do not need to do.
+            /*for (final Integer i: tracks) {
                 final int idx = evt.findPointerIndex(i);
                 /*addDot(
                     mDots,
                     evt.getX(idx),
                     evt.getY(idx),
                     evt.getPressure(idx),
-                    evt.getSize(idx));*/
-            }
+                    evt.getSize(idx));
+            }*/
 
             return true;
         }
 
-        private void addDot(
-                final Dots dots,
+        /*private void addMonster(
+                final Monsters monsters,
                 final float x,
                 final float y,
                 final float p,
                 final float s) {
-            dots.addDot(x, y, Color.CYAN, (int) ((p + 0.5) * (s + 0.5) * DOT_DIAMETER));
-        }
+            monsters.addMonster(x, y, Color.CYAN, (int) ((p + 0.5) * (s + 0.5) * DOT_DIAMETER));
+        }*/
     }
 
     private final Random rand = new Random();
 
     /** The application model */
-    private final Dots dotModel = new Dots();
+    private final Monsters dotModel = new Monsters();
 
     /** The application view */
     private DotView dotView;
@@ -157,18 +161,19 @@ public class TouchMe extends Activity {
 
         // find the dots view
         dotView = (DotView) findViewById(R.id.dots);
-        dotView.setDots(dotModel);
+        dotView.setMonsters(dotModel);
 
         dotView.setOnCreateContextMenuListener(this);
         dotView.setOnTouchListener(new TrackingTouchListener(dotModel));
 
-        dotModel.setDotsChangeListener((final Dots dots) -> dotView.invalidate());
+        dotModel.setMonstersChangeListener((final Monsters monsters) -> dotView.invalidate());
 
         //create monsters
         //num_monsters cannot be found...so gonna temporarily set this to 15.
         runOnUiThread(() -> {
             for (int i = 0; i < 3; i++) {
-                makeDot(dotModel, dotView, Color.GREEN);
+                //TODO: Also must generate a unique ID, if we go this route.
+                makeMonster(dotModel, dotView, Color.GREEN, 3, 1, System.currentTimeMillis());
                 //Monsters.add(); TODO this is where we could add the monster...
             }
         });
@@ -210,14 +215,15 @@ public class TouchMe extends Activity {
         System.out.println("Testing complete.");
         final EditText tb1 = (EditText) findViewById(R.id.text1);
         final EditText tb2 = (EditText) findViewById(R.id.text2);
-        dotModel.setDotsChangeListener((final Dots dots) -> {
-            final Dot d = dots.getLastDot();
-            tb1.setText((null == d) ? "" : String.valueOf(d.getX()));
-            tb2.setText((null == d) ? "" : String.valueOf(d.getY()));
+        dotModel.setMonstersChangeListener((final Monsters monsters) -> {
+            final Monster m = monsters.getLastMonster();
+            tb1.setText((null == m) ? "" : String.valueOf(m.getX()));
+            tb2.setText((null == m) ? "" : String.valueOf(m.getY()));
             dotView.invalidate();
         });
     }
 
+    //The on resume method
     @Override public void onResume() {
         super.onResume();
         if (dotGenerator == null) {
@@ -229,8 +235,9 @@ public class TouchMe extends Activity {
                     // must invoke makeDot on the UI thread to avoid
                     // ConcurrentModificationException on list of dots
                     runOnUiThread(() -> {
-                        moveDots(dotModel, dotView);
-                        makeDot(dotModel, dotView, Color.GREEN);
+                        moveMonsters(dotModel, dotView);
+                        //TODO: ID for each monster
+                        makeMonster(dotModel, dotView, Color.GREEN, 3, 1, System.currentTimeMillis());
                         changeColors(dotModel);
                     });
                 }
@@ -256,7 +263,7 @@ public class TouchMe extends Activity {
     @Override public boolean onOptionsItemSelected(final MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_clear:
-                dotModel.clearDots();
+                dotModel.clearMonsters();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -275,7 +282,7 @@ public class TouchMe extends Activity {
     @Override public boolean onContextItemSelected(final MenuItem item) {
         switch (item.getItemId()) {
             case 1:
-                dotModel.clearDots();
+                dotModel.clearMonsters();
                 return true;
             default:
                 return false;
@@ -283,34 +290,36 @@ public class TouchMe extends Activity {
     }
 
     /**
-     * @param dots the dots we're drawing
-     * @param view the view in which we're drawing dots
-     * @param color the color of the dot
+     * @param monsters the monsters we're placing
+     * @param view the view in which we're drawing monsters
+     * @param color the color of the monster (yellow or green)
      */
-    void makeDot(final Dots dots, final DotView view, final int color) { //// TODO: making of "Monsters" v1
+    void makeMonster(final Monsters monsters, final DotView view, final int color,
+                     final int numLives, final int ID, final long startTime) {
         final int pad = (DOT_DIAMETER + 2) * 2;
-        dots.addDot(
+        monsters.addMonster(
             DOT_DIAMETER + (rand.nextFloat() * (view.getWidth() - pad)),
             DOT_DIAMETER + (rand.nextFloat() * (view.getHeight() - pad)),
             color,
-            DOT_DIAMETER);
+            DOT_DIAMETER, numLives, ID, startTime);
         //TODO or Monster can be added here.
     }
-    void moveDots(final Dots dots, final DotView view) {
+    //TODO Rashan, use this method to move the monsters?
+    void moveMonsters(final Monsters monsters, final DotView view) {
         final int pad = (DOT_DIAMETER + 2) * 2;
-        for (Dot dot : dots.getDots()) {
+        for (Monster dot : monsters.getMonsters()) {
             dot.setX(DOT_DIAMETER + (rand.nextFloat() * (view.getWidth() - pad)));
             dot.setY(DOT_DIAMETER + (rand.nextFloat() * (view.getWidth() - pad)));
         }
     }
 
-    void changeColors(final Dots dots) {
-        for (Dot dot : dots.getDots()) {
+    void changeColors(final Monsters monsters) {
+        for (Monster monster : monsters.getMonsters()) {
             Random rand = new Random();
             if (rand.nextInt(2) == 0) {
-                dot.setColor(Color.YELLOW);
+                monster.setColor(Color.YELLOW);
             } else {
-                dot.setColor(Color.GREEN);
+                monster.setColor(Color.GREEN);
             }
         }
     }
