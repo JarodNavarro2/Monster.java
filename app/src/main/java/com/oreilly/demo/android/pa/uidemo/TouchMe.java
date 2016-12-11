@@ -12,6 +12,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.oreilly.demo.android.pa.uidemo.model.Dot;
 import com.oreilly.demo.android.pa.uidemo.model.Dots;
@@ -28,6 +29,7 @@ import java.util.TimerTask;
 public class TouchMe extends Activity {
 
     private Board board = null;
+    int x,y;
 
 
     /** Dot diameter */
@@ -43,8 +45,52 @@ public class TouchMe extends Activity {
     public static Integer dpHeight=100;
 
 
+    // this tracks what cells in the grid are clicked
+    public void onTouch( View v) {
+        TextView cell = (TextView) findViewById(v.getId());
+
+        String content = (String) cell.getText();
+        if(content != null) { // checks to see if cell is empty, cause if it is empty, we don't care
+            switch(cell.getId()){
+                case R.id.cell11:
+                    x = 0; y = 0; break;
+                case R.id.cell12:
+                    x = 0; y = 1; break;
+                case R.id.cell13:
+                    x = 0; y = 2; break;
+                case R.id.cell14:
+                    x = 0; y = 3; break;
+                case R.id.cell21:
+                    x = 1; y = 0; break;
+                case R.id.cell22:
+                    x = 1; y = 1; break;
+                case R.id.cell23:
+                    x = 1; y = 2; break;
+                case R.id.cell24:
+                    x = 1; y = 3; break;
+                case R.id.cell31:
+                    x = 2; y = 0; break;
+                case R.id.cell32:
+                    x = 2; y = 1; break;
+                case R.id.cell33:
+                    x = 2; y = 2; break;
+                case R.id.cell34:
+                    x = 2; y = 3; break;
+                case R.id.cell41:
+                    x = 2; y = 0; break;
+                case R.id.cell42:
+                    x = 2; y = 1; break;
+                case R.id.cell43:
+                    x = 2; y = 2; break;
+                case R.id.cell44:
+                    x = 2; y = 3; break;
+        }
+            // put a board.decrease monster vulnerability or kill monster here
+
+    }
+
     /** Listen for taps. */
-    private static final class TrackingTouchListener implements View.OnTouchListener {
+    /*private static final class TrackingTouchListener implements View.OnTouchListener {
         private final Dots mDots;
         private List<Integer> tracks = new ArrayList<>();
         //public static final ArrayList<Integer> RectArray= new ArrayList<Integer>(); //TODO each 4 vals contains edge vals of boxes.
@@ -70,7 +116,7 @@ public class TouchMe extends Activity {
                             we need to see how far away the monster is from the top, left, right,
                             and bottom of the square. that value will replace the constant 10*/
                         }
-                        if (Monsters[i][4] == 0) {
+                       /* if (Monsters[i][4] == 0) {
                             System.out.println("POINTER HIT");
                             //TODO no more lives left--monster should not appear
                         }
@@ -114,7 +160,7 @@ public class TouchMe extends Activity {
                     evt.getY(idx),
                     evt.getPressure(idx),
                     evt.getSize(idx));*/
-            }
+          /*  }
 
             return true;
         }
@@ -127,7 +173,7 @@ public class TouchMe extends Activity {
                 final float s) {
             dots.addDot(x, y, Color.CYAN, (int) ((p + 0.5) * (s + 0.5) * DOT_DIAMETER));
         }
-    }
+    }*/
 
     private final Random rand = new Random();
 
@@ -167,7 +213,7 @@ public class TouchMe extends Activity {
         dotView.setDots(dotModel);
 
         dotView.setOnCreateContextMenuListener(this);
-        dotView.setOnTouchListener(new TrackingTouchListener(dotModel));
+        //dotView.setOnTouchListener(new TrackingTouchListener(dotModel));
 
         dotModel.setDotsChangeListener((final Dots dots) -> dotView.invalidate());
 
