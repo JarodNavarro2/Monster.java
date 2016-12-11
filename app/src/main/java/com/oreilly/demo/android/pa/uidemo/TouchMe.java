@@ -3,12 +3,14 @@ package com.oreilly.demo.android.pa.uidemo;
 import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.EditText;
 
 import com.oreilly.demo.android.pa.uidemo.model.Dot;
@@ -33,8 +35,8 @@ public class TouchMe extends Activity {
     // refresh rate (how often monster moves, changes state), and when the monster was originally created (labeled startTime).
     // startTime is a long converted to an integer (originally System.currentTimeMillis() for when the monster was created)
     // that is used to compare against the current Time (using System.currentTimeMillis()). if currentTime-(startTime)%(mod by the) refresh rate is 0, move the monster.
-    public static Integer dpWidth =0;
-    public static Integer dpHeight=0;
+    public static Integer dpWidth =100;
+    public static Integer dpHeight=100;
 
 
     /** Listen for taps. */
@@ -124,6 +126,10 @@ public class TouchMe extends Activity {
 
         // install the view
         setContentView(R.layout.main);
+        DisplayMetrics dm = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(dm);
+        int height = dm.heightPixels;
+        int width = dm.widthPixels;
         /*DisplayMetrics displayMetrics = Resources.getSystem().getDisplayMetrics();
         int dpHeight = (int)(displayMetrics.heightPixels / displayMetrics.density + 0.5);
         int dpWidth = (int)(displayMetrics.widthPixels / displayMetrics.density + 0.5);
@@ -145,7 +151,7 @@ public class TouchMe extends Activity {
         //create monsters
         //num_monsters cannot be found...so gonna temporarily set this to 15.
         runOnUiThread(() -> {
-            for (int i = 0; i < 15; i++) {
+            for (int i = 0; i < 3; i++) {
                 makeDot(dotModel, dotView, Color.GREEN);
                 //Monsters.add(); TODO this is where we could add the monster...
             }
@@ -299,6 +305,8 @@ public class TouchMe extends Activity {
         Integer k, ticks, Color, lives, xCoord, yCoord;
         Long time;
         //TODO example monster...this is where I last saw an error.
+        Monsters = new Integer[3][10];
+        Monster_StartTimes = new Long[Monsters.length][1];
         Monsters[0][0] = 1;//ID
         Monster_StartTimes[0][0] = System.currentTimeMillis();//time
         Monsters[0][1] = 1;//color
@@ -312,8 +320,10 @@ public class TouchMe extends Activity {
         //start loop.
         for (i = 0; i < Monsters.length; i++) {
             k = Monsters[i][0]; //Monster ID
-            time = Monster_StartTimes[i][0];
-            ticks = Monsters[i][6];
+            //time = Monster_StartTimes[i][0];
+            time = 0L;
+            //ticks = Monsters[i][6];
+            ticks = 2;
             Color = Monsters[i][2];   // Color Flip?   1=Green, 2=Yellow
             //int lives = Monsters[i][5];       //x (lives)
             //Monsters[i][3], Monsters[i][4] store the xCoord, yCoord of a monster, respectively.
@@ -324,7 +334,7 @@ public class TouchMe extends Activity {
                 ticks = new Random().nextInt(61 - 5) + 5;
             }
             ;
-            if (time == 0) {
+            if (time == 0L) {
                 time = Currtime;
             }
 
