@@ -5,7 +5,6 @@
     android:layout_height="fill_parent"
     android:baselineAligned="false">
 
-
   <TableLayout
       android:id="@+id/Grid"
       android:layout_width="fill_parent"

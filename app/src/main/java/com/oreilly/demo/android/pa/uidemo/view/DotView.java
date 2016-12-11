@@ -10,8 +10,8 @@ import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.view.View;
 
-import com.oreilly.demo.android.pa.uidemo.model.Dot;
-import com.oreilly.demo.android.pa.uidemo.model.Dots;
+import com.oreilly.demo.android.pa.uidemo.model.Monster;
+import com.oreilly.demo.android.pa.uidemo.model.Monsters;
 
 import static com.oreilly.demo.android.pa.uidemo.TouchMe.dpHeight;
 import static com.oreilly.demo.android.pa.uidemo.TouchMe.dpWidth;
@@ -24,7 +24,7 @@ import static com.oreilly.demo.android.pa.uidemo.TouchMe.dpWidth;
  */
 public class DotView extends View {
 
-    private volatile Dots dots;
+    private volatile Monsters monsters;
     public final boolean row1=false; public final boolean row2=false;public final boolean row3=false;
     public final boolean col1=false; public final boolean col2=false;public final boolean col3=false;
 
@@ -56,9 +56,9 @@ public class DotView extends View {
     }
 
     /**
-     * @param dots
+     * @param monsters
      */
-    public void setDots(final Dots dots) { this.dots = dots; }
+    public void setMonsters(final Monsters monsters) { this.monsters = monsters; }
 
     /**
      * @see android.view.View#onDraw(android.graphics.Canvas)
@@ -200,17 +200,17 @@ public class DotView extends View {
         }
         /*Coord[4][4]=(getWidth()/2);
         Coord[4][5]=(getHeight()/2);*/
-        if (null == dots) { return; }
+        if (null == monsters) { return; }
 
         paint.setStyle(Style.FILL);
         //TODO put popBoard  here.?
-        for (final Dot dot : dots.getDots()) {
-            paint.setColor(dot.getColor());
+        for (final Monster monster : monsters.getMonsters()) {
+            paint.setColor(monster.getColor());
             canvas.drawCircle(
-                dot.getX(),
-                dot.getY(),
-                dot.getDiameter(),
-                paint);
+                    monster.getX(),
+                    monster.getY(),
+                    monster.getDiameter(),
+                    paint);
         }
     }
 }
