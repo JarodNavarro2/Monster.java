@@ -26,6 +26,10 @@ import java.util.TimerTask;
 
 /** Android UI demo program */
 public class TouchMe extends Activity {
+
+    private Board board = null;
+
+
     /** Dot diameter */
     public static final int DOT_DIAMETER = 30;//min size must be 5 or so...
     public static Integer[][] Monsters;  //TODO this could be the end result object to contain the Monsters EDIT: originally 7d, now 2d.
@@ -142,6 +146,9 @@ public class TouchMe extends Activity {
 
         // install the view
         setContentView(R.layout.main);
+        board = new Board();
+
+
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
         int height = dm.heightPixels;
@@ -156,7 +163,7 @@ public class TouchMe extends Activity {
 
 
         // find the dots view
-        dotView = (DotView) findViewById(R.id.dots);
+        //dotView = (DotView) findViewById(R.id.dots);
         dotView.setDots(dotModel);
 
         dotView.setOnCreateContextMenuListener(this);
@@ -208,11 +215,11 @@ public class TouchMe extends Activity {
         PopBoard();//TODO: @npredey...this routine is a good portion of what needs to be done to initialize the monsters on the screen. Get this working and the ability to see if the user touched a monster, then our part of the project at this stage is done.
 
         System.out.println("Testing complete.");
-        final EditText tb1 = (EditText) findViewById(R.id.text1);
+        //final EditText tb1 = (EditText) findViewById(R.id.text1);
         final EditText tb2 = (EditText) findViewById(R.id.text2);
         dotModel.setDotsChangeListener((final Dots dots) -> {
             final Dot d = dots.getLastDot();
-            tb1.setText((null == d) ? "" : String.valueOf(d.getX()));
+            //tb1.setText((null == d) ? "" : String.valueOf(d.getX()));
             tb2.setText((null == d) ? "" : String.valueOf(d.getY()));
             dotView.invalidate();
         });

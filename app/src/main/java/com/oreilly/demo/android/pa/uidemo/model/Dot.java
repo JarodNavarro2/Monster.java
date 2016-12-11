@@ -2,7 +2,7 @@ package com.oreilly.demo.android.pa.uidemo.model;
 
 
 /** A dot: the coordinates, color and size. */
-public final class Dot {
+public class Dot {
     private float x, y;
     private int color;
     private final int diameter;
