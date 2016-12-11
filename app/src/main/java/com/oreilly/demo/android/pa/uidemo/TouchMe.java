@@ -27,9 +27,9 @@ import java.util.TimerTask;
 /** Android UI demo program */
 public class TouchMe extends Activity {
     /** Dot diameter */
-    public static final int DOT_DIAMETER = 5;//min size must be 5 or so...
-    public Integer[][]Monsters;  //TODO this could be the end result object to contain the Monsters EDIT: originally 7d, now 2d.
-    public Long[][]Monster_StartTimes;  //TODO this could be the end result object to contain the Monsters EDIT: originally 7d, now 2d.
+    public static final int DOT_DIAMETER = 30;//min size must be 5 or so...
+    public static Integer[][] Monsters;  //TODO this could be the end result object to contain the Monsters EDIT: originally 7d, now 2d.
+    public static Long[][] Monster_StartTimes;  //TODO this could be the end result object to contain the Monsters EDIT: originally 7d, now 2d.
     // Array: (monster number, or some int k), startTime, Color, xCoord, yCoord, x (num of lives), ticks/refresh
     //this could contain the monster ID  (number used to find the correct monster), xCoord, yCoord, num of lives, color (stored as 0 or 1 for yellow, green),
     // refresh rate (how often monster moves, changes state), and when the monster was originally created (labeled startTime).
@@ -55,6 +55,22 @@ public class TouchMe extends Activity {
             switch (action & MotionEvent.ACTION_MASK) {
                 case MotionEvent.ACTION_DOWN:
                     //TODO this is where we could define the monster being clicked...
+                    for (int i = 0; i < Monsters.length; i++) {
+                        if ((((touchX + 10 >= Monsters[i][2]) && (Monsters[i][2] >= (touchX - 10)))
+                                && ((touchY + 10 >= Monsters[i][3])
+                                && (Monsters[i][3] >= (touchY - 10))) && Monsters[i][5] == 2)) {
+                            Monsters[i][4]--;
+                            System.out.println("HERE");
+                            /*TODO get bounds of the grid to determine the distance that the point
+                            is "good" which means that the click event is within a grid square
+                            we need to see how far away the monster is from the top, left, right,
+                            and bottom of the square. that value will replace the constant 10*/
+                        }
+                        if (Monsters[i][4] == 0) {
+                            System.out.println("POINTER HIT");
+                            //TODO no more lives left--monster should not appear
+                        }
+                    }
                 case MotionEvent.ACTION_POINTER_DOWN:
 
                     final int idx1 = (action & MotionEvent.ACTION_POINTER_INDEX_MASK)
@@ -88,12 +104,12 @@ public class TouchMe extends Activity {
 
             for (final Integer i: tracks) {
                 final int idx = evt.findPointerIndex(i);
-                addDot(
+                /*addDot(
                     mDots,
                     evt.getX(idx),
                     evt.getY(idx),
                     evt.getPressure(idx),
-                    evt.getSize(idx));
+                    evt.getSize(idx));*/
             }
 
             return true;
@@ -305,20 +321,21 @@ public class TouchMe extends Activity {
         Integer k, ticks, Color, lives, xCoord, yCoord;
         Long time;
         //TODO example monster...this is where I last saw an error.
-        Monsters = new Integer[3][10];
+        Monsters = new Integer[1][10];
         Monster_StartTimes = new Long[Monsters.length][1];
         Monsters[0][0] = 1;//ID
         Monster_StartTimes[0][0] = System.currentTimeMillis();//time
         Monsters[0][1] = 1;//color
-        Monsters[0][2] = 130;//x
-        Monsters[0][3] = 33;//y
+        Monsters[0][2] = 720;//x (Testing with midX from View)
+        Monsters[0][3] = 893;//y (Testing with midY from View)
         Monsters[0][4] = 3; //3 lives
         Monsters[0][5] = 2;
         //prints out one instance of monster.
         System.out.println("Monsters[0][0]: "+Monsters[0][0] +"\nMonster_StartTimes[0][0]: "+Monster_StartTimes[0][0]+"\nMonsters[0][1]: "+
                 Monsters[0][1]+"\nMonsters[0][2]: "+ Monsters[0][2]+"\nMonsters[0][3]: "+ Monsters[0][3] +"\nMonsters[0][4]: "+Monsters[0][4] +"\nMonsters[0][5]: "+Monsters[0][5]);
         //start loop.
-        for (i = 0; i < Monsters.length; i++) {
+        /*for (i = 0; i < Monsters.length; i++) {
+            Monster_StartTimes[i][0] = System.currentTimeMillis();
             k = Monsters[i][0]; //Monster ID
             //time = Monster_StartTimes[i][0];
             time = 0L;
@@ -346,7 +363,7 @@ public class TouchMe extends Activity {
             Monsters[i][6] = ticks;
             // TODO: for Monsters[i][3], Monsters[i][4], make sure monster appears within the limits of the display,
             //and if possible, limit so that only one monster can be in a display at any time.
-        }
+        }*/
         ;
     }
 }

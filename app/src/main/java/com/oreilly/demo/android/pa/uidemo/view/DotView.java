@@ -27,6 +27,7 @@ public class DotView extends View {
     private volatile Dots dots;
     public final boolean row1=false; public final boolean row2=false;public final boolean row3=false;
     public final boolean col1=false; public final boolean col2=false;public final boolean col3=false;
+
     /**
      * @param context the rest of the application
      */
