@@ -9,34 +9,27 @@ import com.oreilly.demo.android.pa.uidemo.model.Monster;
 // so this will/ may get more complex once monster is created.
 
 public class Board {
-
     private Monster[][] theBoard = new Monster[4][4];
     Monster monster;
     Monster monster1;
     Monster monster2;
 
     Board() { // places no monster in each board
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                theBoard[i][j] = null;
-            }
-        }
+        clear();
     }
 
     //places Monster in board
     public void placeMonster(int x, int y, Monster monster1) {
         if (theBoard[x][y] == null)
             theBoard[x][y] = monster1;
-
     }
 
     public void MonsterMovement(){
-
     }
 
     public void populateBoard(){
         placeMonster(0, 1, monster1);
-        placeMonster(2,3, monster2);
+        placeMonster(2, 3, monster2);
     }
 
     public void Attack(int x, int y, Monster monsterattacked){
@@ -47,8 +40,8 @@ public class Board {
 
     // clears the board of monsters
     public void clear() {
-        for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 4; j++) {
+        for (int i = 0; i < theBoard.length; i++) {
+            for (int j = 0; j < theBoard[i].length; j++) {
                 theBoard[i][j] = null;
             }
         }

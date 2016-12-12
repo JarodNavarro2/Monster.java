@@ -37,35 +37,35 @@ public class TouchMeTest {
 
     @Test
     public void touchMeTest() {
-        ViewInteraction button = onView(
-                allOf(withId(R.id.button1),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(R.id.root),
-                                        2),
-                                0),
-                        isDisplayed()));
-        button.check(matches(isDisplayed()));
-
-        ViewInteraction button2 = onView(
-                allOf(withId(R.id.button2),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(R.id.root),
-                                        2),
-                                1),
-                        isDisplayed()));
-        button2.check(matches(isDisplayed()));
-
-        ViewInteraction imageButton = onView(
-                allOf(withContentDescription("More options"),
-                        childAtPosition(
-                                childAtPosition(
-                                        IsInstanceOf.<View>instanceOf(android.view.ViewGroup.class),
-                                        1),
-                                0),
-                        isDisplayed()));
-        imageButton.check(matches(isDisplayed()));
+//        ViewInteraction button = onView(
+//                allOf(withId(R.id.button1),
+//                        childAtPosition(
+//                                childAtPosition(
+//                                        withId(R.id.root),
+//                                        2),
+//                                0),
+//                        isDisplayed()));
+//        button.check(matches(isDisplayed()));
+//
+//        ViewInteraction button2 = onView(
+//                allOf(withId(R.id.button2),
+//                        childAtPosition(
+//                                childAtPosition(
+//                                        withId(R.id.root),
+//                                        2),
+//                                1),
+//                        isDisplayed()));
+//        button2.check(matches(isDisplayed()));
+//
+//        ViewInteraction imageButton = onView(
+//                allOf(withContentDescription("More options"),
+//                        childAtPosition(
+//                                childAtPosition(
+//                                        IsInstanceOf.<View>instanceOf(android.view.ViewGroup.class),
+//                                        1),
+//                                0),
+//                        isDisplayed()));
+//        imageButton.check(matches(isDisplayed()));
 
     }
 
