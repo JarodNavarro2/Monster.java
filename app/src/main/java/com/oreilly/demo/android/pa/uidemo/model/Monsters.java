@@ -7,14 +7,18 @@ import java.util.List;
 
 /** A list of monsters. */
 public class Monsters {
+    private final LinkedList<Monster> monsters = new LinkedList<>();
+    private final List<Monster> safeMonsters = Collections.unmodifiableList(monsters);
+
+
+
     /** DotChangeListener. */
     public interface MonstersChangeListener {
         /** @param monsters the dots that changed. */
         void onDotsChange(Monsters monsters);
     }
 
-    private final LinkedList<Monster> monsters = new LinkedList<>();
-    private final List<Monster> safeMonsters = Collections.unmodifiableList(monsters);
+
 
     private MonstersChangeListener monstersChangeListener;
 

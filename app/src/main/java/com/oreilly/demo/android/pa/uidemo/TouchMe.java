@@ -46,12 +46,44 @@ public class TouchMe extends Activity {
         TrackingTouchListener(final Monsters monsters) { mMonsters = monsters; }
 
         @Override public boolean onTouch(final View v, final MotionEvent evt) {
-            final int action = evt.getAction();
-            final float touchX=evt.getX();
-            final float touchY=evt.getY();
-            System.out.println("Location of touch (x,y): ("+touchX+","+touchY+")");
+            int action = evt.getAction();
+             float touchX = evt.getX();
+             float touchY = evt.getY();
+
+            switch(action & MotionEvent.ACTION_MASK) {
+                case MotionEvent.ACTION_DOWN:
+                case MotionEvent.ACTION_POINTER_DOWN:
+                    final int idx1 = (action & MotionEvent.ACTION_POINTER_INDEX_MASK)
+                            >> MotionEvent.ACTION_POINTER_INDEX_SHIFT;
+                    tracks.add(evt.getPointerId(idx1));
+                    break;
+
+                case MotionEvent.ACTION_POINTER_UP:
+                    final int idx2 = (action & MotionEvent.ACTION_POINTER_INDEX_MASK)
+                            >> MotionEvent.ACTION_POINTER_INDEX_SHIFT;
+                    tracks.remove(evt.getPointerId(idx2));
+                    break;
+
+                case MotionEvent.ACTION_MOVE:
+                    final int n = evt.getHistorySize();
+                    for (Integer i : tracks) {
+                        final int idx = evt.findPointerIndex(i);
+                        for (int j = 0; j < n; j++) {
+                            addMonster(
+                                    mMonsters,
+                                    evt.getHistoricalX(idx, j),
+                                    evt.getHistoricalY(idx, j),
+                                    evt.getHistoricalPressure(idx, j),
+                                    evt.getHistoricalSize(idx, j));
+                        }
+                    }
+
+
+
+
+           // System.out.println("Location of touch (x,y): ("+touchX+","+touchY+")");
             //Android graphics and touch events, also getX,getY for touched area     TODO <------------
-            switch (action & MotionEvent.ACTION_MASK) {
+            /*switch (action & MotionEvent.ACTION_MASK) {
                 case MotionEvent.ACTION_DOWN:
                     //TODO this is where we could define the monster being clicked...
                     for (int i = 0; i < Monsters.length; i++) {
@@ -64,7 +96,7 @@ public class TouchMe extends Activity {
                             is "good" which means that the click event is within a grid square
                             we need to see how far away the monster is from the top, left, right,
                             and bottom of the square. that value will replace the constant 10*/
-                        }
+                       /* }
                         if (Monsters[i][4] == 0) {
                             System.out.println("POINTER HIT");
                             //TODO no more lives left--monster should not appear
@@ -93,7 +125,7 @@ public class TouchMe extends Activity {
                         }
                     }
                     break;
-
+*/
                 default:
                     // MotionEvent class provides many methods to query the position and other properties of pointers, such as getX(int), getY(int), getAxisValue(int), getPointerId(int), getToolType(int)
                     // identify View was touched & getX, getY  <--------------------------------TODO
@@ -114,7 +146,7 @@ public class TouchMe extends Activity {
             return true;
         }
 
-        private void addMonster(
+        private static void addMonster(
                 final Monsters monsters,
                 final float x,
                 final float y,

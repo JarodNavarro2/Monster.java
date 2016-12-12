@@ -24,7 +24,7 @@ public final class Monster {
         this.diameter = diameter;
         this.numLives = numLives;
         this.ID = ID;
-        this.startTime = startTime; // Wwhat is this?
+        this.startTime = startTime; //TODO What is this?
     }
 
     /** @return the horizontal coordinate. */

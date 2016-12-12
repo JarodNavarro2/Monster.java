@@ -70,6 +70,23 @@ public class MonsterView extends View {
         paint.setColor(hasFocus() ? Color.BLUE : Color.GRAY);
         canvas.drawRect(0, 0, getWidth() - 1, getHeight() -1, paint);
 
+        if (monsters == null){
+            return; // cause there are no monsters
+        }
+
+        paint.setStyle(Style.FILL);
+        for( Monster monster : monsters.getMonsters() ){
+            paint.setColor(monster.getColor());
+            canvas.drawCircle(monster.getX(), monster.getY(), monster.getDiameter(), paint);
+        }
+
+
+
+
+
+
+
+        /*
         DisplayMetrics displayMetrics = Resources.getSystem().getDisplayMetrics();
         //dpHeight = (int)(displayMetrics.heightPixels / displayMetrics.density + 0.5);
         //dpWidth = (int)(displayMetrics.widthPixels / displayMetrics.density + 0.5);
@@ -196,13 +213,13 @@ public class MonsterView extends View {
                 }
                 //else{System.out.println("Error...i != 0-5....");}
             }*/
-            RectNum++;//increment rect num in outer loop.
+            /*RectNum++;//increment rect num in outer loop.
         }
         /*Coord[4][4]=(getWidth()/2);
         Coord[4][5]=(getHeight()/2);*/
-        if (null == monsters) { return; }
+      //  if (null == monsters) { return; }
 
-        paint.setStyle(Style.FILL);
+       /* paint.setStyle(Style.FILL);
         //TODO put popBoard  here.?
         for (final Monster monster : monsters.getMonsters()) {
             paint.setColor(monster.getColor());
@@ -211,6 +228,6 @@ public class MonsterView extends View {
                     monster.getY(),
                     monster.getDiameter(),
                     paint);
-        }
+        }*/
     }
 }
