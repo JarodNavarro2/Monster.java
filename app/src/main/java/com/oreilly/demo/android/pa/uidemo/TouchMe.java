@@ -10,12 +10,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.EditText;
 
+import com.oreilly.demo.android.pa.uidemo.view.MonsterView;
 import com.oreilly.demo.android.pa.uidemo.model.Monster;
 import com.oreilly.demo.android.pa.uidemo.model.Monsters;
-import com.oreilly.demo.android.pa.uidemo.view.DotView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,10 +40,10 @@ public class TouchMe extends Activity {
 
     /** Listen for taps. */
     private static final class TrackingTouchListener implements View.OnTouchListener {
-        private final Dots mDots;
+        private final Monsters mMonsters;
         private List<Integer> tracks = new ArrayList<>();
         //public static final ArrayList<Integer> RectArray= new ArrayList<Integer>(); //TODO each 4 vals contains edge vals of boxes.
-        TrackingTouchListener(final Dots dots) { mDots = dots; }
+        TrackingTouchListener(final Monsters monsters) { mMonsters = monsters; }
 
         @Override public boolean onTouch(final View v, final MotionEvent evt) {
             final int action = evt.getAction();
@@ -89,7 +88,7 @@ public class TouchMe extends Activity {
                     for (Integer i: tracks) {
                         final int idx = evt.findPointerIndex(i);
                         for (int j = 0; j < n; j++) {
-                            addDot( mDots, evt.getHistoricalX(idx, j), evt.getHistoricalY(idx, j),
+                            addMonster( mMonsters, evt.getHistoricalX(idx, j), evt.getHistoricalY(idx, j),
                                     evt.getHistoricalPressure(idx, j), evt.getHistoricalSize(idx, j));
                         }
                     }
@@ -115,23 +114,23 @@ public class TouchMe extends Activity {
             return true;
         }
 
-        private void addDot(
-                final Dots dots,
+        private void addMonster(
+                final Monsters monsters,
                 final float x,
                 final float y,
                 final float p,
                 final float s) {
-            dots.addDot(x, y, Color.CYAN, (int) ((p + 0.5) * (s + 0.5) * DOT_DIAMETER));
+            monsters.addMonster(x,y,Color.CYAN, (int) ((p+0.5)* (s+0.5) * DOT_DIAMETER), 1, 2, 3);
         }
     }
 
     private final Random rand = new Random();
 
     /** The application model */
-    private final Dots dotModel = new Dots();
+    private final Monsters monsterModel = new Monsters();
 
     /** The application view */
-    private DotView dotView;
+    private MonsterView monsterView;
 
     /** The dot generator */
     private Timer dotGenerator;
@@ -156,19 +155,19 @@ public class TouchMe extends Activity {
 
 
         // find the dots view
-        dotView = (DotView) findViewById(R.id.dots);
-        dotView.setDots(dotModel);
+        monsterView = (MonsterView) findViewById(R.id.monsters);
+        monsterView.setDots(monsterModel);
 
-        dotView.setOnCreateContextMenuListener(this);
-        dotView.setOnTouchListener(new TrackingTouchListener(dotModel));
+        monsterView.setOnCreateContextMenuListener(this);
+        monsterView.setOnTouchListener(new TrackingTouchListener(monsterModel));
 
-        dotModel.setDotsChangeListener((final Dots dots) -> dotView.invalidate());
+        monsterModel.setMonstersChangeListener((final Monsters monsters) -> monsterView.invalidate());
 
         //create monsters
         //num_monsters cannot be found...so gonna temporarily set this to 15.
         runOnUiThread(() -> {
             for (int i = 0; i < 3; i++) {
-                makeDot(dotModel, dotView, Color.GREEN);
+                makeDot(monsterModel, monsterView, Color.GREEN);
                 //Monsters.add(); TODO this is where we could add the monster...
             }
         });
@@ -208,13 +207,13 @@ public class TouchMe extends Activity {
         PopBoard();//TODO: @npredey...this routine is a good portion of what needs to be done to initialize the monsters on the screen. Get this working and the ability to see if the user touched a monster, then our part of the project at this stage is done.
 
         System.out.println("Testing complete.");
-        final EditText tb1 = (EditText) findViewById(R.id.text1);
+        //final EditText tb1 = (EditText) findViewById(R.id.text1);
         final EditText tb2 = (EditText) findViewById(R.id.text2);
-        dotModel.setDotsChangeListener((final Dots dots) -> {
-            final Dot d = dots.getLastDot();
-            tb1.setText((null == d) ? "" : String.valueOf(d.getX()));
+        monsterModel.setMonstersChangeListener((final Monsters monsters) -> {
+            final Monster d = monsters.getLastMonster();
+            //tb1.setText((null == d) ? "" : String.valueOf(d.getX()));
             tb2.setText((null == d) ? "" : String.valueOf(d.getY()));
-            dotView.invalidate();
+            monsterView.invalidate();
         });
     }
 
@@ -229,9 +228,9 @@ public class TouchMe extends Activity {
                     // must invoke makeDot on the UI thread to avoid
                     // ConcurrentModificationException on list of dots
                     runOnUiThread(() -> {
-                        moveDots(dotModel, dotView);
-                        makeDot(dotModel, dotView, Color.GREEN);
-                        changeColors(dotModel);
+                        moveDots(monsterModel, monsterView);
+                        makeDot(monsterModel, monsterView, Color.GREEN);
+                        changeColors(monsterModel);
                     });
                 }
             }, /*initial delay*/ 0, /*periodic delay*/ 2000);
@@ -256,7 +255,7 @@ public class TouchMe extends Activity {
     @Override public boolean onOptionsItemSelected(final MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_clear:
-                dotModel.clearDots();
+                monsterModel.clearMonsters();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -275,7 +274,7 @@ public class TouchMe extends Activity {
     @Override public boolean onContextItemSelected(final MenuItem item) {
         switch (item.getItemId()) {
             case 1:
-                dotModel.clearDots();
+                monsterModel.clearMonsters();
                 return true;
             default:
                 return false;
@@ -283,34 +282,34 @@ public class TouchMe extends Activity {
     }
 
     /**
-     * @param dots the dots we're drawing
+     * @param monsters the dots we're drawing
      * @param view the view in which we're drawing dots
      * @param color the color of the dot
      */
-    void makeDot(final Dots dots, final DotView view, final int color) { //// TODO: making of "Monsters" v1
+    void makeDot(final Monsters monsters, final MonsterView view, final int color) { //// TODO: making of "Monsters" v1
         final int pad = (DOT_DIAMETER + 2) * 2;
-        dots.addDot(
+        monsters.addMonster(
                 DOT_DIAMETER + (rand.nextFloat() * (view.getWidth() - pad)),
                 DOT_DIAMETER + (rand.nextFloat() * (view.getHeight() - pad)),
                 color,
-                DOT_DIAMETER);
+                DOT_DIAMETER, 1, 2, 3);
         //TODO or Monster can be added here.
     }
-    void moveDots(final Dots dots, final DotView view) {
+    void moveDots(final Monsters monsters, final MonsterView view) {
         final int pad = (DOT_DIAMETER + 2) * 2;
-        for (Dot dot : dots.getDots()) {
-            dot.setX(DOT_DIAMETER + (rand.nextFloat() * (view.getWidth() - pad)));
-            dot.setY(DOT_DIAMETER + (rand.nextFloat() * (view.getWidth() - pad)));
+        for (Monster monster : monsters.getMonsters()) {
+            monster.setX(DOT_DIAMETER + (rand.nextFloat() * (view.getWidth() - pad)));
+            monster.setY(DOT_DIAMETER + (rand.nextFloat() * (view.getWidth() - pad)));
         }
     }
 
-    void changeColors(final Dots dots) {
-        for (Dot dot : dots.getDots()) {
+    void changeColors(final Monsters monsters) {
+        for (Monster monster : monsters.getMonsters()) {
             Random rand = new Random();
             if (rand.nextInt(2) == 0) {
-                dot.setColor(Color.YELLOW);
+                monster.setColor(Color.YELLOW);
             } else {
-                dot.setColor(Color.GREEN);
+                monster.setColor(Color.GREEN);
             }
         }
     }

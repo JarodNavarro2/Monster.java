@@ -22,16 +22,16 @@ import static com.oreilly.demo.android.pa.uidemo.TouchMe.dpWidth;
  *
  * @author <a href="mailto:android@callmeike.net">Blake Meike</a>
  */
-public class DotView extends View {
+public class MonsterView extends View {
 
-    private volatile Dots dots;
+    private volatile Monsters monsters;
     public final boolean row1=false; public final boolean row2=false;public final boolean row3=false;
     public final boolean col1=false; public final boolean col2=false;public final boolean col3=false;
 
     /**
      * @param context the rest of the application
      */
-    public DotView(final Context context) {
+    public MonsterView(final Context context) {
         super(context);
         setFocusableInTouchMode(true);
     }
@@ -40,7 +40,7 @@ public class DotView extends View {
      * @param context
      * @param attrs
      */
-    public DotView(final Context context, final AttributeSet attrs) {
+    public MonsterView(final Context context, final AttributeSet attrs) {
         super(context, attrs);
         setFocusableInTouchMode(true);
     }
@@ -50,15 +50,15 @@ public class DotView extends View {
      * @param attrs
      * @param defStyle
      */
-    public DotView(final Context context, final AttributeSet attrs, final int defStyle) {
+    public MonsterView(final Context context, final AttributeSet attrs, final int defStyle) {
         super(context, attrs, defStyle);
         setFocusableInTouchMode(true);
     }
 
     /**
-     * @param dots
+     * @param monsters
      */
-    public void setDots(final Dots dots) { this.dots = dots; }
+    public void setDots(final Monsters monsters) { this.monsters = monsters; }
 
     /**
      * @see android.view.View#onDraw(android.graphics.Canvas)
@@ -200,16 +200,16 @@ public class DotView extends View {
         }
         /*Coord[4][4]=(getWidth()/2);
         Coord[4][5]=(getHeight()/2);*/
-        if (null == dots) { return; }
+        if (null == monsters) { return; }
 
         paint.setStyle(Style.FILL);
         //TODO put popBoard  here.?
-        for (final Dot dot : dots.getDots()) {
-            paint.setColor(dot.getColor());
+        for (final Monster monster : monsters.getMonsters()) {
+            paint.setColor(monster.getColor());
             canvas.drawCircle(
-                    dot.getX(),
-                    dot.getY(),
-                    dot.getDiameter(),
+                    monster.getX(),
+                    monster.getY(),
+                    monster.getDiameter(),
                     paint);
         }
     }
