@@ -1,5 +1,7 @@
 package com.oreilly.demo.android.pa.uidemo;
 
+import android.graphics.Color;
+
 import com.oreilly.demo.android.pa.uidemo.model.Monster;
 
 /**
@@ -10,33 +12,32 @@ import com.oreilly.demo.android.pa.uidemo.model.Monster;
 
 public class Board {
     private Monster[][] theBoard = new Monster[4][4];
-    Monster monster;
-    Monster monster1;
-    Monster monster2;
 
     Board() { // places no monster in each board
         clear();
     }
 
     //places Monster in board
-    public void placeMonster(int x, int y, Monster monster1) {
+    public void placeMonster(int x, int y, Monster monster) {
         if (theBoard[x][y] == null)
-            theBoard[x][y] = monster1;
+            theBoard[x][y] = monster;
     }
 
     public void MonsterMovement(){
     }
 
     public void populateBoard(){
-        placeMonster(0, 1, monster1);
-        placeMonster(2, 3, monster2);
+        placeMonster(0, 1, new Monster(0, 1, Color.YELLOW, 6, 4, 0, 0));
+        placeMonster(2, 3, new Monster(2, 3, Color.YELLOW, 6, 4, 0, 0));
+        placeMonster(3, 1, new Monster(3, 1, Color.YELLOW, 6, 4, 0, 0));
     }
 
-    public void Attack(int x, int y, Monster monsterattacked){
-        // write a statement to find monster id, and then decremennt lives for that monster here
-        monsterattacked.setNumLives(monsterattacked.getNumLives() - 1);
+    public void Attack(int x, int y){
+        Monster monster = theBoard[x][y];
+        if (monster != null){
+            monster.setNumLives(monster.getNumLives() - 1);
+        }
     }
-
 
     // clears the board of monsters
     public void clear() {

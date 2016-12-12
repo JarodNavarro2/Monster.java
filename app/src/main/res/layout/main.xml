@@ -26,9 +26,9 @@
           android:layout_width="0dp"
             android:layout_weight="1"
             android:gravity="center"
-          android:onClick="cellClick"
+          android:onClick="onClick"
             android:clickable="true"
-          android:textAppearance="@android:style/TextAppearance.Material.Large" />
+          android:textAppearance="?android:attr/textAppearanceLarge" />
 
       <TextView
           android:id="@+id/cell12"
@@ -39,7 +39,7 @@
           android:textSize="50sp"
           android:textStyle="bold"
           android:textAppearance="?android:attr/textAppearanceLarge"
-          android:onClick="cellClick"
+          android:onClick="onClick"
           android:clickable="true"/>
 
       <TextView
@@ -51,7 +51,7 @@
           android:textSize="50sp"
           android:textStyle="bold"
           android:textAppearance="?android:attr/textAppearanceLarge"
-          android:onClick="cellClick"
+          android:onClick="onClick"
           android:clickable="true"/>
 
       <TextView
@@ -63,7 +63,7 @@
           android:textSize="50sp"
           android:textStyle="bold"
           android:textAppearance="?android:attr/textAppearanceLarge"
-          android:onClick="cellClick"
+          android:onClick="onClick"
           android:clickable="true"/>
     </TableRow>
       <TableRow
@@ -82,7 +82,7 @@
             android:textSize="50sp"
             android:textStyle="bold"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:onClick="cellClick"
+            android:onClick="onClick"
             android:clickable="true"/>
 
         <TextView
@@ -94,7 +94,7 @@
             android:textSize="50sp"
             android:textStyle="bold"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:onClick="cellClick"
+            android:onClick="onClick"
             android:clickable="true"/>
 
         <TextView
@@ -106,7 +106,7 @@
             android:textSize="50sp"
             android:textStyle="bold"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:onClick="cellClick"
+            android:onClick="onClick"
             android:clickable="true"/>
 
         <TextView
@@ -118,7 +118,7 @@
             android:textSize="50sp"
             android:textStyle="bold"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:onClick="cellClick"
+            android:onClick="onClick"
             android:clickable="true"/>
       </TableRow>
       <TableRow
@@ -137,7 +137,7 @@
             android:textSize="50sp"
             android:textStyle="bold"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:onClick="cellClick"
+            android:onClick="onClick"
             android:clickable="true"/>
 
         <TextView
@@ -149,7 +149,7 @@
           android:textSize="50sp"
           android:textStyle="bold"
           android:textAppearance="?android:attr/textAppearanceLarge"
-          android:onClick="cellClick"
+          android:onClick="onClick"
           android:clickable="true"/>
 
         <TextView
@@ -161,7 +161,7 @@
           android:textSize="50sp"
           android:textStyle="bold"
           android:textAppearance="?android:attr/textAppearanceLarge"
-          android:onClick="cellClick"
+          android:onClick="onClick"
           android:clickable="true"/>
 
         <TextView
@@ -173,7 +173,7 @@
             android:textSize="50sp"
             android:textStyle="bold"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:onClick="cellClick"
+            android:onClick="onClick"
             android:clickable="true"/>
   </TableRow>
   <TableRow
@@ -192,7 +192,7 @@
         android:textSize="50sp"
         android:textStyle="bold"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:onClick="cellClick"
+        android:onClick="onClick"
         android:clickable="true"/>
 
     <TextView
@@ -204,7 +204,7 @@
         android:textSize="50sp"
         android:textStyle="bold"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:onClick="cellClick"
+        android:onClick="onClick"
         android:clickable="true"/>
 
     <TextView
@@ -216,7 +216,7 @@
         android:textSize="50sp"
         android:textStyle="bold"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:onClick="cellClick"
+        android:onClick="onClick"
         android:clickable="true"/>
 
     <TextView
@@ -228,7 +228,7 @@
         android:textSize="50sp"
         android:textStyle="bold"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:onClick="cellClick"
+        android:onClick="onClick"
         android:clickable="true"/>
   </TableRow>
   </TableLayout>

@@ -7,8 +7,6 @@ import java.util.List;
 
 /** A list of monsters. */
 public class Monsters {
-
-
     /** DotChangeListener. */
     public interface MonstersChangeListener {
         /** @param monsters the dots that changed. */
