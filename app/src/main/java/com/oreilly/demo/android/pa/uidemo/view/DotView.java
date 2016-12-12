@@ -13,8 +13,8 @@ import android.view.View;
 import com.oreilly.demo.android.pa.uidemo.model.Monster;
 import com.oreilly.demo.android.pa.uidemo.model.Monsters;
 
-//import static com.oreilly.demo.android.pa.uidemo.TouchMe.dpHeight;
-//import static com.oreilly.demo.android.pa.uidemo.TouchMe.dpWidth;
+import static com.oreilly.demo.android.pa.uidemo.TouchMe.dpHeight;
+import static com.oreilly.demo.android.pa.uidemo.TouchMe.dpWidth;
 
 
 /**
@@ -24,7 +24,7 @@ import com.oreilly.demo.android.pa.uidemo.model.Monsters;
  */
 public class DotView extends View {
 
-    private volatile Monsters monsters;
+    private volatile Dots dots;
     public final boolean row1=false; public final boolean row2=false;public final boolean row3=false;
     public final boolean col1=false; public final boolean col2=false;public final boolean col3=false;
 
@@ -56,9 +56,9 @@ public class DotView extends View {
     }
 
     /**
-     * @param monsters
+     * @param dots
      */
-    public void setMonsters(final Monsters monsters) { this.monsters = monsters; }
+    public void setDots(final Dots dots) { this.dots = dots; }
 
     /**
      * @see android.view.View#onDraw(android.graphics.Canvas)
@@ -73,8 +73,8 @@ public class DotView extends View {
         DisplayMetrics displayMetrics = Resources.getSystem().getDisplayMetrics();
         //dpHeight = (int)(displayMetrics.heightPixels / displayMetrics.density + 0.5);
         //dpWidth = (int)(displayMetrics.widthPixels / displayMetrics.density + 0.5);
-        //dpHeight =getWidth() ;
-        //dpWidth = getHeight() ;
+        dpHeight =getWidth() ;
+        dpWidth = getHeight() ;
         //int n=9;
         //int m=1;
         //System.out.println("(dpHeight*dpWidth)/(n*m):"+(dpHeight*dpWidth)/(n*m));
@@ -200,16 +200,16 @@ public class DotView extends View {
         }
         /*Coord[4][4]=(getWidth()/2);
         Coord[4][5]=(getHeight()/2);*/
-        if (null == monsters) { return; }
+        if (null == dots) { return; }
 
         paint.setStyle(Style.FILL);
         //TODO put popBoard  here.?
-        for (final Monster monster : monsters.getMonsters()) {
-            paint.setColor(monster.getColor());
+        for (final Dot dot : dots.getDots()) {
+            paint.setColor(dot.getColor());
             canvas.drawCircle(
-                    monster.getX(),
-                    monster.getY(),
-                    monster.getDiameter(),
+                    dot.getX(),
+                    dot.getY(),
+                    dot.getDiameter(),
                     paint);
         }
     }
