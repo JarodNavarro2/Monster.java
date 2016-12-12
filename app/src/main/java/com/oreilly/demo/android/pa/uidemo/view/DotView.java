@@ -13,8 +13,8 @@ import android.view.View;
 import com.oreilly.demo.android.pa.uidemo.model.Monster;
 import com.oreilly.demo.android.pa.uidemo.model.Monsters;
 
-import static com.oreilly.demo.android.pa.uidemo.TouchMe.dpHeight;
-import static com.oreilly.demo.android.pa.uidemo.TouchMe.dpWidth;
+//import static com.oreilly.demo.android.pa.uidemo.TouchMe.dpHeight;
+//import static com.oreilly.demo.android.pa.uidemo.TouchMe.dpWidth;
 
 
 /**
@@ -73,8 +73,8 @@ public class DotView extends View {
         DisplayMetrics displayMetrics = Resources.getSystem().getDisplayMetrics();
         //dpHeight = (int)(displayMetrics.heightPixels / displayMetrics.density + 0.5);
         //dpWidth = (int)(displayMetrics.widthPixels / displayMetrics.density + 0.5);
-        dpHeight =getWidth() ;
-        dpWidth = getHeight() ;
+        //dpHeight =getWidth() ;
+        //dpWidth = getHeight() ;
         //int n=9;
         //int m=1;
         //System.out.println("(dpHeight*dpWidth)/(n*m):"+(dpHeight*dpWidth)/(n*m));

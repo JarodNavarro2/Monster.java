@@ -24,11 +24,11 @@
           android:id="@+id/cell11"
           android:layout_height="fill_parent"
           android:layout_width="0dp"
-            android:layout_weight="1"
-            android:gravity="center"
-          android:onClick="cellClick"
-            android:clickable="true"
-          android:textAppearance="@android:style/TextAppearance.Material.Large" />
+          android:layout_weight="1"
+          android:gravity="center"
+          android:onClick="onClick"
+          android:clickable="true"
+          android:textAppearance="?android:attr/textAppearanceLarge" />
 
       <TextView
           android:id="@+id/cell12"
@@ -39,7 +39,7 @@
           android:textSize="50sp"
           android:textStyle="bold"
           android:textAppearance="?android:attr/textAppearanceLarge"
-          android:onClick="cellClick"
+          android:onClick="onClick"
           android:clickable="true"/>
 
       <TextView
@@ -51,7 +51,7 @@
           android:textSize="50sp"
           android:textStyle="bold"
           android:textAppearance="?android:attr/textAppearanceLarge"
-          android:onClick="cellClick"
+          android:onClick="onClick"
           android:clickable="true"/>
 
       <TextView
@@ -63,84 +63,84 @@
           android:textSize="50sp"
           android:textStyle="bold"
           android:textAppearance="?android:attr/textAppearanceLarge"
-          android:onClick="cellClick"
+          android:onClick="onClick"
           android:clickable="true"/>
     </TableRow>
-      <TableRow
+    <TableRow
         android:id="@+id/Row2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="center">
 
-        <TextView
-            android:id="@+id/cell21"
-            android:layout_height="fill_parent"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:textSize="50sp"
-            android:textStyle="bold"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:onClick="cellClick"
-            android:clickable="true"/>
+      <TextView
+          android:id="@+id/cell21"
+          android:layout_height="fill_parent"
+          android:layout_width="0dp"
+          android:layout_weight="1"
+          android:gravity="center"
+          android:textSize="50sp"
+          android:textStyle="bold"
+          android:textAppearance="?android:attr/textAppearanceLarge"
+          android:onClick="onClick"
+          android:clickable="true"/>
 
-        <TextView
-            android:id="@+id/cell22"
-            android:layout_height="fill_parent"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:textSize="50sp"
-            android:textStyle="bold"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:onClick="cellClick"
-            android:clickable="true"/>
+      <TextView
+          android:id="@+id/cell22"
+          android:layout_height="fill_parent"
+          android:layout_width="0dp"
+          android:layout_weight="1"
+          android:gravity="center"
+          android:textSize="50sp"
+          android:textStyle="bold"
+          android:textAppearance="?android:attr/textAppearanceLarge"
+          android:onClick="onClick"
+          android:clickable="true"/>
 
-        <TextView
-            android:id="@+id/cell23"
-            android:layout_height="fill_parent"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:textSize="50sp"
-            android:textStyle="bold"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:onClick="cellClick"
-            android:clickable="true"/>
+      <TextView
+          android:id="@+id/cell23"
+          android:layout_height="fill_parent"
+          android:layout_width="0dp"
+          android:layout_weight="1"
+          android:gravity="center"
+          android:textSize="50sp"
+          android:textStyle="bold"
+          android:textAppearance="?android:attr/textAppearanceLarge"
+          android:onClick="onClick"
+          android:clickable="true"/>
 
-        <TextView
-            android:id="@+id/cell24"
-            android:layout_height="fill_parent"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:textSize="50sp"
-            android:textStyle="bold"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:onClick="cellClick"
-            android:clickable="true"/>
-      </TableRow>
-      <TableRow
+      <TextView
+          android:id="@+id/cell24"
+          android:layout_height="fill_parent"
+          android:layout_width="0dp"
+          android:layout_weight="1"
+          android:gravity="center"
+          android:textSize="50sp"
+          android:textStyle="bold"
+          android:textAppearance="?android:attr/textAppearanceLarge"
+          android:onClick="onClick"
+          android:clickable="true"/>
+    </TableRow>
+    <TableRow
         android:id="@+id/Row3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="center">
 
-        <TextView
-            android:id="@+id/cell31"
-            android:layout_height="fill_parent"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:textSize="50sp"
-            android:textStyle="bold"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:onClick="cellClick"
-            android:clickable="true"/>
+      <TextView
+          android:id="@+id/cell31"
+          android:layout_height="fill_parent"
+          android:layout_width="0dp"
+          android:layout_weight="1"
+          android:gravity="center"
+          android:textSize="50sp"
+          android:textStyle="bold"
+          android:textAppearance="?android:attr/textAppearanceLarge"
+          android:onClick="onClick"
+          android:clickable="true"/>
 
-        <TextView
+      <TextView
           android:id="@+id/cell32"
           android:layout_height="fill_parent"
           android:layout_width="0dp"
@@ -149,10 +149,10 @@
           android:textSize="50sp"
           android:textStyle="bold"
           android:textAppearance="?android:attr/textAppearanceLarge"
-          android:onClick="cellClick"
+          android:onClick="onClick"
           android:clickable="true"/>
 
-        <TextView
+      <TextView
           android:id="@+id/cell33"
           android:layout_height="fill_parent"
           android:layout_width="0dp"
@@ -161,76 +161,76 @@
           android:textSize="50sp"
           android:textStyle="bold"
           android:textAppearance="?android:attr/textAppearanceLarge"
-          android:onClick="cellClick"
+          android:onClick="onClick"
           android:clickable="true"/>
 
-        <TextView
-            android:id="@+id/cell34"
-            android:layout_height="fill_parent"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:textSize="50sp"
-            android:textStyle="bold"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:onClick="cellClick"
-            android:clickable="true"/>
-  </TableRow>
-  <TableRow
-      android:id="@+id/Row4"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_weight="1"
-      android:gravity="center">
-
-    <TextView
-        android:id="@+id/cell41"
-        android:layout_height="fill_parent"
-        android:layout_width="0dp"
+      <TextView
+          android:id="@+id/cell34"
+          android:layout_height="fill_parent"
+          android:layout_width="0dp"
+          android:layout_weight="1"
+          android:gravity="center"
+          android:textSize="50sp"
+          android:textStyle="bold"
+          android:textAppearance="?android:attr/textAppearanceLarge"
+          android:onClick="onClick"
+          android:clickable="true"/>
+    </TableRow>
+    <TableRow
+        android:id="@+id/Row4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:gravity="center"
-        android:textSize="50sp"
-        android:textStyle="bold"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:onClick="cellClick"
-        android:clickable="true"/>
+        android:gravity="center">
 
-    <TextView
-        android:id="@+id/cell42"
-        android:layout_height="fill_parent"
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:textSize="50sp"
-        android:textStyle="bold"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:onClick="cellClick"
-        android:clickable="true"/>
+      <TextView
+          android:id="@+id/cell41"
+          android:layout_height="fill_parent"
+          android:layout_width="0dp"
+          android:layout_weight="1"
+          android:gravity="center"
+          android:textSize="50sp"
+          android:textStyle="bold"
+          android:textAppearance="?android:attr/textAppearanceLarge"
+          android:onClick="onClick"
+          android:clickable="true"/>
 
-    <TextView
-        android:id="@+id/cell43"
-        android:layout_height="fill_parent"
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:textSize="50sp"
-        android:textStyle="bold"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:onClick="cellClick"
-        android:clickable="true"/>
+      <TextView
+          android:id="@+id/cell42"
+          android:layout_height="fill_parent"
+          android:layout_width="0dp"
+          android:layout_weight="1"
+          android:gravity="center"
+          android:textSize="50sp"
+          android:textStyle="bold"
+          android:textAppearance="?android:attr/textAppearanceLarge"
+          android:onClick="onClick"
+          android:clickable="true"/>
 
-    <TextView
-        android:id="@+id/cell44"
-        android:layout_height="fill_parent"
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:textSize="50sp"
-        android:textStyle="bold"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:onClick="cellClick"
-        android:clickable="true"/>
-  </TableRow>
+      <TextView
+          android:id="@+id/cell43"
+          android:layout_height="fill_parent"
+          android:layout_width="0dp"
+          android:layout_weight="1"
+          android:gravity="center"
+          android:textSize="50sp"
+          android:textStyle="bold"
+          android:textAppearance="?android:attr/textAppearanceLarge"
+          android:onClick="onClick"
+          android:clickable="true"/>
+
+      <TextView
+          android:id="@+id/cell44"
+          android:layout_height="fill_parent"
+          android:layout_width="0dp"
+          android:layout_weight="1"
+          android:gravity="center"
+          android:textSize="50sp"
+          android:textStyle="bold"
+          android:textAppearance="?android:attr/textAppearanceLarge"
+          android:onClick="onClick"
+          android:clickable="true"/>
+    </TableRow>
   </TableLayout>
   <LinearLayout
       android:orientation="horizontal"
