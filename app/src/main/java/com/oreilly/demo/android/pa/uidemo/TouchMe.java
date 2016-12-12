@@ -101,7 +101,7 @@ public class TouchMe extends Activity {
                     // MotionEvent class provides many methods to query the position and other properties of pointers, such as getX(int), getY(int), getAxisValue(int), getPointerId(int), getToolType(int)
                     // identify View was touched & getX, getY  <--------------------------------TODO
                     //return super.onTouchEvent(evt); //evt.getActionIndex(); ?
-                return false;
+                    return false;
             }
 
             //also should not need this code. I kept it just in case, but again, this is tracking
@@ -213,11 +213,11 @@ public class TouchMe extends Activity {
         PopBoard();//TODO: @npredey...this routine is a good portion of what needs to be done to initialize the monsters on the screen. Get this working and the ability to see if the user touched a monster, then our part of the project at this stage is done.
 
         System.out.println("Testing complete.");
-        final EditText tb1 = (EditText) findViewById(R.id.text1);
+        //final EditText tb1 = (EditText) findViewById(R.id.text1);
         final EditText tb2 = (EditText) findViewById(R.id.text2);
         dotModel.setMonstersChangeListener((final Monsters monsters) -> {
             final Monster m = monsters.getLastMonster();
-            tb1.setText((null == m) ? "" : String.valueOf(m.getX()));
+            //tb1.setText((null == m) ? "" : String.valueOf(m.getX()));
             tb2.setText((null == m) ? "" : String.valueOf(m.getY()));
             dotView.invalidate();
         });
@@ -298,10 +298,10 @@ public class TouchMe extends Activity {
                      final int numLives, final int ID, final long startTime) {
         final int pad = (DOT_DIAMETER + 2) * 2;
         monsters.addMonster(
-            DOT_DIAMETER + (rand.nextFloat() * (view.getWidth() - pad)),
-            DOT_DIAMETER + (rand.nextFloat() * (view.getHeight() - pad)),
-            color,
-            DOT_DIAMETER, numLives, ID, startTime);
+                DOT_DIAMETER + (rand.nextFloat() * (view.getWidth() - pad)),
+                DOT_DIAMETER + (rand.nextFloat() * (view.getHeight() - pad)),
+                color,
+                DOT_DIAMETER, numLives, ID, startTime);
         //TODO or Monster can be added here.
     }
     //TODO Rashan, use this method to move the monsters?

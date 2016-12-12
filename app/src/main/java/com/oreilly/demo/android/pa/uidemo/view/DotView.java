@@ -207,10 +207,10 @@ public class DotView extends View {
         for (final Monster monster : monsters.getMonsters()) {
             paint.setColor(monster.getColor());
             canvas.drawCircle(
-                monster.getX(),
-                monster.getY(),
-                monster.getDiameter(),
-                paint);
+                    monster.getX(),
+                    monster.getY(),
+                    monster.getDiameter(),
+                    paint);
         }
     }
 }
