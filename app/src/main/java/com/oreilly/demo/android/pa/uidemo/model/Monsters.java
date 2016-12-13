@@ -10,7 +10,6 @@ import java.util.Random;
 public class Monsters {
     private final LinkedList<Monster> monsters = new LinkedList<>();
     private final List<Monster> safeMonsters = Collections.unmodifiableList(monsters);
-    private Monster[][] matrix;
     private final Random rand = new Random();
 
     public boolean intersctsVulnMonster(Monster userTouch) {

@@ -29,11 +29,7 @@ public class TouchMe extends Activity {
     public static final int DOT_DIAMETER = 30;//min size must be 5 or so...
     public static Integer[][] Monsters;  //TODO this could be the end result object to contain the Monsters EDIT: originally 7d, now 2d.
     public static Long[][] Monster_StartTimes;  //TODO this could be the end result object to contain the Monsters EDIT: originally 7d, now 2d.
-    // Array: (monster number, or some int k), startTime, Color, xCoord, yCoord, x (num of lives), ticks/refresh
-    //this could contain the monster ID  (number used to find the correct monster), xCoord, yCoord, num of lives, color (stored as 0 or 1 for yellow, green),
-    // refresh rate (how often monster moves, changes state), and when the monster was originally created (labeled startTime).
-    // startTime is a long converted to an integer (originally System.currentTimeMillis() for when the monster was created)
-    // that is used to compare against the current Time (using System.currentTimeMillis()). if currentTime-(startTime)%(mod by the) refresh rate is 0, move the monster.
+
     public static Integer dpWidth =100;
     public static Integer dpHeight=100;
 
@@ -50,6 +46,7 @@ public class TouchMe extends Activity {
             int action = evt.getAction();
              float touchX = evt.getX();
              float touchY = evt.getY();
+             //getRowColumnIndex()
 
             switch(action & MotionEvent.ACTION_MASK) {
                 case MotionEvent.ACTION_DOWN:
@@ -59,30 +56,6 @@ public class TouchMe extends Activity {
                     tracks.add(evt.getPointerId(idx1));
                     break;
 
-                case MotionEvent.ACTION_POINTER_UP:
-                    final int idx2 = (action & MotionEvent.ACTION_POINTER_INDEX_MASK)
-                            >> MotionEvent.ACTION_POINTER_INDEX_SHIFT;
-                    tracks.remove(evt.getPointerId(idx2));
-                    break;
-
-                case MotionEvent.ACTION_MOVE:
-                    final int n = evt.getHistorySize();
-                    for (Integer i : tracks) {
-                        final int idx = evt.findPointerIndex(i);
-                        for (int j = 0; j < n; j++) {
-                            addMonster(
-                                    mMonsters,
-                                    evt.getHistoricalX(idx, j),
-                                    evt.getHistoricalY(idx, j),
-                                    evt.getHistoricalPressure(idx, j),
-                                    evt.getHistoricalSize(idx, j));
-                        }
-                    }
-
-
-
-
-           // System.out.println("Location of touch (x,y): ("+touchX+","+touchY+")");
             //Android graphics and touch events, also getX,getY for touched area     TODO <------------
             /*switch (action & MotionEvent.ACTION_MASK) {
                 case MotionEvent.ACTION_DOWN:
@@ -103,47 +76,11 @@ public class TouchMe extends Activity {
                             //TODO no more lives left--monster should not appear
                         }
                     }
-                case MotionEvent.ACTION_POINTER_DOWN:
 
-                    final int idx1 = (action & MotionEvent.ACTION_POINTER_INDEX_MASK)
-                            >> MotionEvent.ACTION_POINTER_INDEX_SHIFT;
-                    tracks.add(evt.getPointerId(idx1));
-                    break;
-
-                case MotionEvent.ACTION_POINTER_UP:
-                    final int idx2 = (action & MotionEvent.ACTION_POINTER_INDEX_MASK)
-                            >> MotionEvent.ACTION_POINTER_INDEX_SHIFT;
-                    tracks.remove(evt.getPointerId(idx2));
-                    break;
-
-                case MotionEvent.ACTION_MOVE:
-                    final int n = evt.getHistorySize();
-                    for (Integer i: tracks) {
-                        final int idx = evt.findPointerIndex(i);
-                        for (int j = 0; j < n; j++) {
-                            addMonster( mMonsters, evt.getHistoricalX(idx, j), evt.getHistoricalY(idx, j),
-                                    evt.getHistoricalPressure(idx, j), evt.getHistoricalSize(idx, j));
-                        }
-                    }
-                    break;
 */
                 default:
-                    // MotionEvent class provides many methods to query the position and other properties of pointers, such as getX(int), getY(int), getAxisValue(int), getPointerId(int), getToolType(int)
-                    // identify View was touched & getX, getY  <--------------------------------TODO
-                    //return super.onTouchEvent(evt); //evt.getActionIndex(); ?
                     return false;
             }
-
-            for (final Integer i: tracks) {
-                final int idx = evt.findPointerIndex(i);
-                addMonster(
-                    mMonsters,
-                    evt.getX(idx),
-                    evt.getY(idx),
-                    evt.getPressure(idx),
-                    evt.getSize(idx));
-            }
-
             return true;
         }
         private static void addMonster(
@@ -326,7 +263,6 @@ public class TouchMe extends Activity {
                 DOT_DIAMETER + (rand.nextFloat() * (view.getHeight() - pad)),
                 color,
                 DOT_DIAMETER, 1, 2, 3);
-        //TODO or Monster can be added here.
     }
     void moveDots(final Monsters monsters, final MonsterView view) {
         final int pad = (DOT_DIAMETER + 2) * 2;
@@ -345,57 +281,5 @@ public class TouchMe extends Activity {
                 monster.setColor(Color.GREEN);
             }
         }
-    }
-    public void PopBoard() {
-//Populate Board (array) & check clocks            //<----------- ***///
-        long Currtime = System.currentTimeMillis();       // grabs current time to compare to ticks/ ticks+time.//<----------- ***///
-        int i = 0;
-        Integer k, ticks, Color, lives, xCoord, yCoord;
-        Long time;
-        //TODO example monster...this is where I last saw an error.
-        Monsters = new Integer[1][10];
-        Monster_StartTimes = new Long[Monsters.length][1];
-        Monsters[0][0] = 1;//ID
-        Monster_StartTimes[0][0] = System.currentTimeMillis();//time
-        Monsters[0][1] = 1;//color
-        Monsters[0][2] = 720;//x (Testing with midX from View)
-        Monsters[0][3] = 893;//y (Testing with midY from View)
-        Monsters[0][4] = 3; //3 lives
-        Monsters[0][5] = 2;
-        //prints out one instance of monster.
-        System.out.println("Monsters[0][0]: "+Monsters[0][0] +"\nMonster_StartTimes[0][0]: "+Monster_StartTimes[0][0]+"\nMonsters[0][1]: "+
-                Monsters[0][1]+"\nMonsters[0][2]: "+ Monsters[0][2]+"\nMonsters[0][3]: "+ Monsters[0][3] +"\nMonsters[0][4]: "+Monsters[0][4] +"\nMonsters[0][5]: "+Monsters[0][5]);
-        //start loop.
-        /*for (i = 0; i < Monsters.length; i++) {
-            Monster_StartTimes[i][0] = System.currentTimeMillis();
-            k = Monsters[i][0]; //Monster ID
-            //time = Monster_StartTimes[i][0];
-            time = 0L;
-            //ticks = Monsters[i][6];
-            ticks = 2;
-            Color = Monsters[i][2];   // Color Flip?   1=Green, 2=Yellow
-            //int lives = Monsters[i][5];       //x (lives)
-            //Monsters[i][3], Monsters[i][4] store the xCoord, yCoord of a monster, respectively.
-
-            if (ticks > 0) {
-                ticks--;
-            } else {
-                ticks = new Random().nextInt(61 - 5) + 5;
-            }
-            ;
-            if (time == 0L) {
-                time = Currtime;
-            }
-
-
-            Monsters[i][2] = new Random().nextInt(3 - 1) + 1;    // Color Flip?   1=Green, 2=Yellow
-            Monsters[i][3] = new Random().nextInt(dpWidth - DOT_DIAMETER) + DOT_DIAMETER;  // xCoord
-            Monsters[i][4] = new Random().nextInt(dpHeight - DOT_DIAMETER) + DOT_DIAMETER;  // yCoord
-            Monsters[i][5] = 3;   //x (Lives) ...temporarily set to 3.
-            Monsters[i][6] = ticks;
-            // TODO: for Monsters[i][3], Monsters[i][4], make sure monster appears within the limits of the display,
-            //and if possible, limit so that only one monster can be in a display at any time.
-        }*/
-        ;
     }
 }
