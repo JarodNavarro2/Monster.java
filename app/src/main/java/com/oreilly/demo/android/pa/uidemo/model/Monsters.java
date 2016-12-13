@@ -12,21 +12,6 @@ public class Monsters {
     private final List<Monster> safeMonsters = Collections.unmodifiableList(monsters);
     private final Random rand = new Random();
 
-    public boolean intersctsVulnMonster(Monster userTouch) {
-        for ( Monster monster: monsters )
-            if ( monster.getX() - ( monster.getDiameter() ) <= userTouch.getX() && userTouch.getX() <= monster.getX() + ( monster.getDiameter() ) &&
-                    monster.getY() - ( monster.getDiameter() ) <= userTouch.getY() && userTouch.getY() <= monster.getY() + ( monster.getDiameter() ) )
-            {
-                monster.setX(rand.nextInt(3));
-                monster.setX(rand.nextInt(3));
-                matrix[ (int) monster.getX() ][(int) monster.getY()] = null;
-                monsters.remove( monster );
-                return true;
-            }
-        return false;
-    }
-
-
     /** DotChangeListener. */
     public interface MonstersChangeListener {
         /** @param monsters the dots that changed. */

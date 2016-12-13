@@ -27,8 +27,6 @@ import java.util.TimerTask;
 public class TouchMe extends Activity {
     /** Dot diameter */
     public static final int DOT_DIAMETER = 30;//min size must be 5 or so...
-    public static Integer[][] Monsters;  //TODO this could be the end result object to contain the Monsters EDIT: originally 7d, now 2d.
-    public static Long[][] Monster_StartTimes;  //TODO this could be the end result object to contain the Monsters EDIT: originally 7d, now 2d.
 
     public static Integer dpWidth =100;
     public static Integer dpHeight=100;
@@ -145,7 +143,7 @@ public class TouchMe extends Activity {
                     // ConcurrentModificationException on list of dots
                     runOnUiThread(() -> {
                         moveDots(monsterModel, monsterView);
-                        makeDot(monsterModel, monsterView, Color.GREEN);
+                        //makeDot(monsterModel, monsterView, Color.GREEN);
                         changeColors(monsterModel);
                     });
                 }

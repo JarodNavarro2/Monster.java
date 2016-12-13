@@ -9,6 +9,7 @@ public final class Monster {
     private int numLives;
     private int ID;
     private boolean vulnerable;
+    private boolean moving;
     private long startTime;
     private Monsters monsters;
 
@@ -50,10 +51,10 @@ public final class Monster {
     /** @return the start time of monster creation.*/
     public long getStartTime() { return startTime; }
 
-    public void setX(int x) { this.x = x; }
+    public void setX(float x) { this.x = x; }
 
     // setter method for y-coordinate
-    public void setY(int y) { this.y = y; }
+    public void setY(float y) { this.y = y; }
 
     // setter method for color
     public void setColor(int color) { this.color = color; }
@@ -61,7 +62,7 @@ public final class Monster {
     //setter method for number of lives
     public void setNumLives(int numLives) { this.numLives = numLives; }
 
-    public void handleEvent() {
+    public void handleTouchEvent() {
         if (vulnerable) { //vulnerable or not
             numLives--;
         }
@@ -70,5 +71,11 @@ public final class Monster {
         }
     }
 
+    public void handleClockEvent() {
+        if (!moving) {
+            moving = true;
+
+        }
+    }
 
 }
