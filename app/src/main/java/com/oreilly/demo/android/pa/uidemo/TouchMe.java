@@ -36,23 +36,28 @@ public class TouchMe extends Activity {
     private static final class TrackingTouchListener implements View.OnTouchListener {
         private static MonsterView monsterView;
         private final Monsters mMonsters;
-        private List<Integer> tracks = new ArrayList<>();
         TrackingTouchListener(final Monsters monsters) { mMonsters = monsters; }
 
         @Override public boolean onTouch(final View v, final MotionEvent evt) {
             int action = evt.getAction();
              float touchX = evt.getX();
              float touchY = evt.getY();
-             //getRowColumnIndex() //TODO: need to get what hypothetical row/column the event is in
+             //int getRowColumnIndex(float xCoord, float yCoord) //TODO: need to get what hypothetical row/column the event is in
                                    //TODO: and then update the monster that is in the grid cell
                                    //TODO: based off of that cell.
-
+            //getRowColumnIndex() should return an integer value of the cell that the touch event or
+            // that the monster is currently in.
             switch(action & MotionEvent.ACTION_MASK) {
                 case MotionEvent.ACTION_DOWN:
                 case MotionEvent.ACTION_POINTER_DOWN:
-                    final int idx1 = (action & MotionEvent.ACTION_POINTER_INDEX_MASK)
-                            >> MotionEvent.ACTION_POINTER_INDEX_SHIFT;
-                    tracks.add(evt.getPointerId(idx1));
+                    //if (getRowColumnIndex(float touchX, float touchY) == getRowColumnIndex(float monster.x, float monster.y)
+                    //if the touch event coordinates are in the same cell as the monster && the monster
+                    //is in the vulenerable state (which gets handled by the handleTouch event method
+                    //of the monster class. which then subracts a life from the monster)
+                    //"theoretically", not actually dividing the screen into cells from a visual point,
+                    //getting the height and width of the screen and dividing into, say 3 rows, 3 columns
+                    //then from there you can determine the range that the cell will occupy (think in
+                    //terms of a box) Get height and width of view
                     break;
                 default:
                     return false;
@@ -65,6 +70,7 @@ public class TouchMe extends Activity {
 
     /** The application model */
     private final Monsters monsterModel = new Monsters();
+
 
     /** The application view */
     private MonsterView monsterView;
