@@ -8,7 +8,9 @@ public final class Monster {
     private final int diameter;
     private int numLives;
     private int ID;
+    private boolean vulnerable;
     private long startTime;
+    private Monsters monsters;
 
     /**
      * @param x horizontal coordinate.
@@ -17,14 +19,14 @@ public final class Monster {
      * @param diameter dot diameter.
      */
     public Monster(final float x, final float y, final int color, final int diameter,
-                   final int numLives, final int ID, final long startTime, ) {
+                   final int numLives, final int ID, final long startTime, Monsters monsters) {
         this.x = x;
         this.y = y;
         this.color = color;
         this.diameter = diameter;
         this.numLives = numLives;
         this.ID = ID;
-        this.startTime = startTime; //TODO What is this?
+        this.monsters = monsters;
     }
 
     /** @return the horizontal coordinate. */
@@ -60,11 +62,12 @@ public final class Monster {
     public void setNumLives(int numLives) { this.numLives = numLives; }
 
     public void handleEvent() {
-        if (color = color)
-
-            if (numLives == 0) {
-
-            }
+        if (vulnerable) { //vulnerable or not
+            numLives--;
+        }
+        if (numLives == 0) {
+            monsters.removeMonster(this);
+        }
     }
 
 

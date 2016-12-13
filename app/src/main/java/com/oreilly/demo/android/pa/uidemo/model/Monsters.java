@@ -61,7 +61,7 @@ public class Monsters {
      */
     public void addMonster(float x, float y, int color, int diameter,
                            int numLives, int ID, long startTime) {
-        monsters.add(new Monster(x, y, color, diameter, numLives, ID, startTime));
+        monsters.add(new Monster(x, y, color, diameter, numLives, ID, startTime, this));
         notifyListener();
     }
 
@@ -69,6 +69,11 @@ public class Monsters {
     //might not need this method
     public void clearMonsters() {
         monsters.clear();
+        notifyListener();
+    }
+
+    public void removeMonster(Monster m) {
+        monsters.remove(m);
         notifyListener();
     }
 

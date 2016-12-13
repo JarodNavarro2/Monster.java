@@ -39,7 +39,6 @@ public class TouchMe extends Activity {
         private static MonsterView monsterView;
         private final Monsters mMonsters;
         private List<Integer> tracks = new ArrayList<>();
-        //public static final ArrayList<Integer> RectArray= new ArrayList<Integer>(); //TODO each 4 vals contains edge vals of boxes.
         TrackingTouchListener(final Monsters monsters) { mMonsters = monsters; }
 
         @Override public boolean onTouch(final View v, final MotionEvent evt) {
@@ -83,16 +82,6 @@ public class TouchMe extends Activity {
             }
             return true;
         }
-        private static void addMonster(
-                final Monsters monsters,
-                final float x,
-                final float y,
-                final float p,
-                final float s) {
-           if(monsters.intersctsVulnMonster(new Monster(x,y,Color.CYAN, (int) ((p+0.5)* (s+0.5) * DOT_DIAMETER), 1, 2, 3))){
-               monsterView.invalidate();
-           }
-        }
     }
 
     private final Random rand = new Random();
@@ -111,21 +100,7 @@ public class TouchMe extends Activity {
         super.onCreate(state);
 
         // install the view
-        setContentView(R.layout.main);
-        DisplayMetrics dm = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(dm);
-        int height = dm.heightPixels;
-        int width = dm.widthPixels;
-        /*DisplayMetrics displayMetrics = Resources.getSystem().getDisplayMetrics();
-        int dpHeight = (int)(displayMetrics.heightPixels / displayMetrics.density + 0.5);
-        int dpWidth = (int)(displayMetrics.widthPixels / displayMetrics.density + 0.5);
-        int n=9;
-        int m=1;
-        System.out.println("(dpHeight*dpWidth)/(n*m):"+(dpHeight*dpWidth)/(n*m)+ "\ndpHeight"+dpHeight+"\ndpWidth"+dpWidth);
-        System.out.println("each square should fill: 1/"+(n*m)+" of the screen.");*/
 
-
-        // find the dots view
         monsterView = (MonsterView) findViewById(R.id.monsters);
         monsterView.setDots(monsterModel);
 
@@ -134,37 +109,11 @@ public class TouchMe extends Activity {
 
         monsterModel.setMonstersChangeListener((final Monsters monsters) -> monsterView.invalidate());
 
-        //create monsters
-        //num_monsters cannot be found...so gonna temporarily set this to 15.
         runOnUiThread(() -> {
             for (int i = 0; i < 3; i++) {
                 makeDot(monsterModel, monsterView, Color.GREEN);
-                //Monsters.add(); TODO this is where we could add the monster...
             }
         });
-
-       /* monsterView.setOnKeyListener((final View v, final int keyCode, final KeyEvent event) -> {
-            if (KeyEvent.ACTION_DOWN != event.getAction()) {
-                return false;
-            }
-            int color;
-            switch (keyCode) {
-                case KeyEvent.KEYCODE_SPACE:
-                    color = Color.MAGENTA;
-                    break;
-                case KeyEvent.KEYCODE_ENTER:
-                    color = Color.BLUE;
-                    break;
-                default:
-                    return false;
-            }
-
-            makeMonster(monsterModel, monsterView, color);
-
-            return true;
-        });*/
-
-
 
         // wire up the controller
         /*findViewById(R.id.button1).setOnClickListener((final View v) ->
@@ -173,10 +122,7 @@ public class TouchMe extends Activity {
         findViewById(R.id.button2).setOnClickListener((final View v) ->
             makeDot(dotModel, dotView, Color.GREEN)
         );*/
-        System.out.println("Testing PopBoard(Monsters)...");
-        PopBoard();//TODO: @npredey...this routine is a good portion of what needs to be done to initialize the monsters on the screen. Get this working and the ability to see if the user touched a monster, then our part of the project at this stage is done.
 
-        System.out.println("Testing complete.");
         //final EditText tb1 = (EditText) findViewById(R.id.text1);
         final EditText tb2 = (EditText) findViewById(R.id.text2);
         monsterModel.setMonstersChangeListener((final Monsters monsters) -> {
