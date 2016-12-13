@@ -18,8 +18,6 @@ public class Monsters {
         void onDotsChange(Monsters monsters);
     }
 
-
-
     private MonstersChangeListener monstersChangeListener;
 
     /** @param l set the change listener. */
@@ -36,15 +34,15 @@ public class Monsters {
     public List<Monster> getMonsters() { return safeMonsters; }
 
     /**
+     * @param x1
+     * @param v
      * @param x dot horizontal coordinate.
      * @param y dot vertical coordinate.
      * @param color dot color.
      * @param diameter dot size.
      * @param numLives the number of lives per monster
-     * @param ID the id of each monster
-     * @param startTime the time each monster was created
      */
-    public void addMonster(float x, float y, int color, int diameter,
+    public void addMonster(float x1, float v, float x, float y, int color, int diameter,
                            int numLives) {
         monsters.add(new Monster(x, y, color, diameter, numLives, this));
         notifyListener();

@@ -56,7 +56,7 @@ public final class Monster {
     /**
      * Handles the touch events for the monster
      */
-    public void handleTouchEvent() {
+    public void handleTouchEvent() { //TODO: Set vulnerability based on color NEEDED
         if (vulnerable) { //vulnerable or not
             numLives--;
         }
@@ -65,7 +65,8 @@ public final class Monster {
         }
     }
 
-    public void handleClockEvent() {
+    public void handleClockEvent() { //TODO: after random said ticks, if monster isnt moving, move it.
+                                     //TODO: If it is moving, set it to false. then repeat NEEDED
         if (!moving) {
             moving = true;
 

@@ -108,6 +108,7 @@ public class TouchMe extends Activity {
         });
     }
 
+    //TODO: create onTick method. Some type of start timer. NEEDED
     @Override public void onResume() {
         super.onResume();
         if (dotGenerator == null) {
