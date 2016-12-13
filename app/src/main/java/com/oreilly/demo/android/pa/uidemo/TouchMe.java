@@ -52,29 +52,6 @@ public class TouchMe extends Activity {
                             >> MotionEvent.ACTION_POINTER_INDEX_SHIFT;
                     tracks.add(evt.getPointerId(idx1));
                     break;
-
-            //Android graphics and touch events, also getX,getY for touched area     TODO <------------
-            /*switch (action & MotionEvent.ACTION_MASK) {
-                case MotionEvent.ACTION_DOWN:
-                    //TODO this is where we could define the monster being clicked...
-                    for (int i = 0; i < Monsters.length; i++) {
-                        if ((((touchX + 10 >= Monsters[i][2]) && (Monsters[i][2] >= (touchX - 10)))
-                                && ((touchY + 10 >= Monsters[i][3])
-                                && (Monsters[i][3] >= (touchY - 10))) && Monsters[i][5] == 2)) {
-                            Monsters[i][4]--;
-                            System.out.println("HERE");
-                            /*TODO get bounds of the grid to determine the distance that the point
-                            is "good" which means that the click event is within a grid square
-                            we need to see how far away the monster is from the top, left, right,
-                            and bottom of the square. that value will replace the constant 10*/
-                       /* }
-                        if (Monsters[i][4] == 0) {
-                            System.out.println("POINTER HIT");
-                            //TODO no more lives left--monster should not appear
-                        }
-                    }
-
-*/
                 default:
                     return false;
             }
