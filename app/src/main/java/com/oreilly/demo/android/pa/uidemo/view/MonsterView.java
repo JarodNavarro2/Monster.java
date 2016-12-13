@@ -25,8 +25,6 @@ import static com.oreilly.demo.android.pa.uidemo.TouchMe.dpWidth;
 public class MonsterView extends View {
 
     private volatile Monsters monsters;
-    public final boolean row1=false; public final boolean row2=false;public final boolean row3=false;
-    public final boolean col1=false; public final boolean col2=false;public final boolean col3=false;
 
     /**
      * @param context the rest of the application
@@ -71,7 +69,7 @@ public class MonsterView extends View {
         canvas.drawRect(0, 0, getWidth() - 1, getHeight() -1, paint);
 
         if (monsters == null){
-            return; // cause there are no monsters
+            return;
         }
 
         paint.setStyle(Style.FILL);

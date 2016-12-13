@@ -45,8 +45,8 @@ public class Monsters {
      * @param startTime the time each monster was created
      */
     public void addMonster(float x, float y, int color, int diameter,
-                           int numLives, int ID, long startTime) {
-        monsters.add(new Monster(x, y, color, diameter, numLives, ID, startTime, this));
+                           int numLives) {
+        monsters.add(new Monster(x, y, color, diameter, numLives, this));
         notifyListener();
     }
 

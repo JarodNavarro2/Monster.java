@@ -7,10 +7,8 @@ public final class Monster {
     private int color;
     private final int diameter;
     private int numLives;
-    private int ID;
     private boolean vulnerable;
     private boolean moving;
-    private long startTime;
     private Monsters monsters;
 
     /**
@@ -20,13 +18,12 @@ public final class Monster {
      * @param diameter dot diameter.
      */
     public Monster(final float x, final float y, final int color, final int diameter,
-                   final int numLives, final int ID, final long startTime, Monsters monsters) {
+                   final int numLives, Monsters monsters) {
         this.x = x;
         this.y = y;
         this.color = color;
         this.diameter = diameter;
         this.numLives = numLives;
-        this.ID = ID;
         this.monsters = monsters;
     }
 
@@ -45,12 +42,6 @@ public final class Monster {
     /** @return the number of lives. */
     public int getNumLives() { return numLives; }
 
-    /** @return the ID of the monster. */
-    public int getID() { return ID; }
-
-    /** @return the start time of monster creation.*/
-    public long getStartTime() { return startTime; }
-
     public void setX(float x) { this.x = x; }
 
     // setter method for y-coordinate
@@ -62,6 +53,9 @@ public final class Monster {
     //setter method for number of lives
     public void setNumLives(int numLives) { this.numLives = numLives; }
 
+    /**
+     * Handles the touch events for the monster
+     */
     public void handleTouchEvent() {
         if (vulnerable) { //vulnerable or not
             numLives--;
