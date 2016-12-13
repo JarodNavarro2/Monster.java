@@ -43,7 +43,9 @@ public class TouchMe extends Activity {
             int action = evt.getAction();
              float touchX = evt.getX();
              float touchY = evt.getY();
-             //getRowColumnIndex()
+             //getRowColumnIndex() //TODO: need to get what hypothetical row/column the event is in
+                                   //TODO: and then update the monster that is in the grid cell
+                                   //TODO: based off of that cell.
 
             switch(action & MotionEvent.ACTION_MASK) {
                 case MotionEvent.ACTION_DOWN:
