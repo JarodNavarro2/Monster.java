@@ -40,6 +40,7 @@ public class TouchMe extends Activity {
 
     /** Listen for taps. */
     private static final class TrackingTouchListener implements View.OnTouchListener {
+        private static MonsterView monsterView;
         private final Monsters mMonsters;
         private List<Integer> tracks = new ArrayList<>();
         //public static final ArrayList<Integer> RectArray= new ArrayList<Integer>(); //TODO each 4 vals contains edge vals of boxes.
@@ -135,24 +136,25 @@ public class TouchMe extends Activity {
 
             for (final Integer i: tracks) {
                 final int idx = evt.findPointerIndex(i);
-                /*addDot(
-                    mDots,
+                addMonster(
+                    mMonsters,
                     evt.getX(idx),
                     evt.getY(idx),
                     evt.getPressure(idx),
-                    evt.getSize(idx));*/
+                    evt.getSize(idx));
             }
 
             return true;
         }
-
         private static void addMonster(
                 final Monsters monsters,
                 final float x,
                 final float y,
                 final float p,
                 final float s) {
-            monsters.addMonster(x,y,Color.CYAN, (int) ((p+0.5)* (s+0.5) * DOT_DIAMETER), 1, 2, 3);
+           if(monsters.intersctsVulnMonster(new Monster(x,y,Color.CYAN, (int) ((p+0.5)* (s+0.5) * DOT_DIAMETER), 1, 2, 3))){
+               monsterView.invalidate();
+           }
         }
     }
 
@@ -204,11 +206,10 @@ public class TouchMe extends Activity {
             }
         });
 
-        /*dotView.setOnKeyListener((final View v, final int keyCode, final KeyEvent event) -> {
+       /* monsterView.setOnKeyListener((final View v, final int keyCode, final KeyEvent event) -> {
             if (KeyEvent.ACTION_DOWN != event.getAction()) {
                 return false;
             }
-
             int color;
             switch (keyCode) {
                 case KeyEvent.KEYCODE_SPACE:
@@ -221,7 +222,7 @@ public class TouchMe extends Activity {
                     return false;
             }
 
-            makeDot(dotModel, dotView, color);
+            makeMonster(monsterModel, monsterView, color);
 
             return true;
         });*/
