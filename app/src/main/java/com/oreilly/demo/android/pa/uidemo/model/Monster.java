@@ -63,6 +63,9 @@ public final class Monster implements ClockListener {
      * Handles the touch events for the monster
      */
     public void handleTouchEvent() { //TODO: Set vulnerability based on color NEEDED
+        if(getColor() == Color.GREEN){ vulnerable = true;}
+        else {vulnerable = false;}
+
         if (vulnerable) { //vulnerable or not
             numLives--;
 
@@ -87,6 +90,7 @@ public final class Monster implements ClockListener {
         if (seconds >= track_sec)
         {
             vulnerable = true;
+            setColor(Color.GREEN);
             return true;
         }
         return false;

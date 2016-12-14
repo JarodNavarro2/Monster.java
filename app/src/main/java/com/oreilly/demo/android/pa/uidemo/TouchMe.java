@@ -42,14 +42,13 @@ public class TouchMe extends Activity
     private static final class TrackingTouchListener implements View.OnTouchListener {
         private static MonsterView monsterView;
         private final Monsters mMonsters;
+        final int pad = (DOT_DIAMETER + 2) * 2;
         TrackingTouchListener(final Monsters monsters) { mMonsters = monsters; }
 
         @Override public boolean onTouch(final View v, final MotionEvent evt) {
             int action = evt.getAction();
-             float touchX = evt.getX()/dpWidth; // I think if we just did this and rounded we would get which box the monster is in
-             float touchY = evt.getY()/dpHeight;
-            touchX = (float)(int) touchX; // basically this gets rid of the decimal
-            touchY = (float)(int) touchY;
+             float touchX = DOT_DIAMETER + (evt.getX() * (v.getWidth() - pad)); // idk if this is right
+             float touchY = DOT_DIAMETER + (evt.getY() * (v.getWidth() - pad));
              //int getRowColumnIndex(float xCoord, float yCoord) //TODO: need to get what hypothetical row/column the event is in
                                    //TODO: and then update the monster that is in the grid cell
                                    //TODO: based off of that cell.
@@ -66,9 +65,10 @@ public class TouchMe extends Activity
                     //getting the height and width of the screen and dividing into, say 3 rows, 3 columns
                     //then from there you can determine the range that the cell will occupy (think in
                     //terms of a box) Get height and width of view
-                   Monster m = new Monster(0,0,0,0,0, mMonsters); // ya so idk, this I think is the right idea, but this isn't
-                    if(getRowColumnIndex(touchX, touchY) == getRowColumnIndex(m.getX(), m.getY())){
-                    m.handleTouchEvent();
+                    for (Monster m : mMonsters.getMonsters()) {
+                        if (getRowColumnIndex(touchX, touchY) == getRowColumnIndex(m.getX(), m.getY())) {
+                            m.handleTouchEvent();
+                        }
                     }
                     break;
                 default:
