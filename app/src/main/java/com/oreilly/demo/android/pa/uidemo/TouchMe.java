@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
+import android.util.Pair;
 
 import com.oreilly.demo.android.pa.uidemo.model.Board;
 import com.oreilly.demo.android.pa.uidemo.view.MonsterView;
@@ -45,8 +46,10 @@ public class TouchMe extends Activity
 
         @Override public boolean onTouch(final View v, final MotionEvent evt) {
             int action = evt.getAction();
-             float touchX = evt.getX();
-             float touchY = evt.getY();
+             float touchX = evt.getX()/dpWidth; // I think if we just did this and rounded we would get which box the monster is in
+             float touchY = evt.getY()/dpHeight;
+            touchX = (float)(int) touchX; // basically this gets rid of the decimal
+            touchY = (float)(int) touchY;
              //int getRowColumnIndex(float xCoord, float yCoord) //TODO: need to get what hypothetical row/column the event is in
                                    //TODO: and then update the monster that is in the grid cell
                                    //TODO: based off of that cell.
@@ -63,11 +66,23 @@ public class TouchMe extends Activity
                     //getting the height and width of the screen and dividing into, say 3 rows, 3 columns
                     //then from there you can determine the range that the cell will occupy (think in
                     //terms of a box) Get height and width of view
+                   Monster m = new Monster(0,0,0,0,0, mMonsters); // ya so idk, this I think is the right idea, but this isn't
+                    if(getRowColumnIndex(touchX, touchY) == getRowColumnIndex(m.getX(), m.getY())){
+                    m.handleTouchEvent();
+                    }
                     break;
                 default:
                     return false;
             }
             return true;
+        }
+
+        Pair<Float, Float> getRowColumnIndex(float xCoord, float yCoord){
+
+            float val1 = xCoord;
+            float val2 = yCoord;
+            return new Pair<>(val1, val2);
+
         }
     }
 

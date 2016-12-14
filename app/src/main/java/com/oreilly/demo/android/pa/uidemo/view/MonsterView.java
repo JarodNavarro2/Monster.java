@@ -102,4 +102,5 @@ public class MonsterView extends View {
             canvas.drawCircle(monster.getX(), monster.getY(), monster.getDiameter(), paint);
         }
     }
+
 }
