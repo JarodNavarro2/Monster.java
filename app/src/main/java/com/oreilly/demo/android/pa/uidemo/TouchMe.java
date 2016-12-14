@@ -48,8 +48,8 @@ public class TouchMe extends Activity
             int action = evt.getAction();
              float touchX = evt.getX()/dpWidth; // I think if we just did this and rounded we would get which box the monster is in
              float touchY = evt.getY()/dpHeight;
-            touchX = (float)(int) touchX; // basically this gets rid of the decimal
-            touchY = (float)(int) touchY;
+            touchX = Math.round(touchX); // basically this gets rid of the decimal
+            touchY = Math.round(touchY);
              //int getRowColumnIndex(float xCoord, float yCoord) //TODO: need to get what hypothetical row/column the event is in
                                    //TODO: and then update the monster that is in the grid cell
                                    //TODO: based off of that cell.
