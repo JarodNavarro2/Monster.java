@@ -3,6 +3,7 @@ package com.oreilly.demo.android.pa.uidemo;
 import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.DisplayMetrics;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
@@ -24,13 +25,16 @@ import java.util.TimerTask;
 
 
 /** Android UI demo program */
-public class TouchMe extends Activity {
+public class TouchMe extends Activity
+{
     /** Dot diameter */
     public static final int DOT_DIAMETER = 30;//min size must be 5 or so...
-
+    Random vul = new Random();
+    Random move = new Random();
+    int is_vul = vul.nextInt(10);
+    int is_move = move.nextInt(10);
     public static Integer dpWidth =100;
     public static Integer dpHeight=100;
-
 
     /** Listen for taps. */
     private static final class TrackingTouchListener implements View.OnTouchListener {
@@ -115,7 +119,7 @@ public class TouchMe extends Activity {
             monsterView.invalidate();
         });
     }
-
+    
     //TODO: create onTick method. Some type of start timer. NEEDED
     @Override public void onResume() {
         super.onResume();
@@ -127,7 +131,8 @@ public class TouchMe extends Activity {
                 public void run() {
                     // must invoke makeDot on the UI thread to avoid
                     // ConcurrentModificationException on list of dots
-                    runOnUiThread(() -> {
+                    runOnUiThread(() ->
+                    {
                         moveDots(monsterModel, monsterView);
                         //makeDot(monsterModel, monsterView, Color.GREEN);
                         changeColors(monsterModel);
