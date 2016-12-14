@@ -49,6 +49,10 @@ public class TouchMe extends Activity
             int action = evt.getAction();
              float touchX = DOT_DIAMETER + (evt.getX() * (v.getWidth() - pad)); // idk if this is right
              float touchY = DOT_DIAMETER + (evt.getY() * (v.getWidth() - pad));
+           /* float touchX = evt.getX()/dpWidth;  // I changed this to the one above
+            float touchY = evt.getY()/dpHeight;
+            touchX = Math.round(touchX);
+            touchY = Math.round(touchY);*/
              //int getRowColumnIndex(float xCoord, float yCoord) //TODO: need to get what hypothetical row/column the event is in
                                    //TODO: and then update the monster that is in the grid cell
                                    //TODO: based off of that cell.
