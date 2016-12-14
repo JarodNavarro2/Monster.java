@@ -6,7 +6,7 @@ import android.os.Handler;
 import android.provider.Settings;
 
 /** A dot: the coordinates, color and size. */
-public final class Monster {
+public final class Monster implements ClockListener {
     private float x, y;
     private int color;
     private final int diameter;
@@ -78,6 +78,8 @@ public final class Monster {
             moving = true;
 
         }
+
+        System.out.println("tick");
     }
     public void TimerTracker()
     {

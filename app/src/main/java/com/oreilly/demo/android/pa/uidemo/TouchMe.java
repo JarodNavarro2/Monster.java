@@ -87,6 +87,7 @@ public class TouchMe extends Activity
         super.onCreate(state);
 
         // install the view
+        setContentView(R.layout.main);
 
         monsterView = (MonsterView) findViewById(R.id.monsters);
         monsterView.setDots(monsterModel);

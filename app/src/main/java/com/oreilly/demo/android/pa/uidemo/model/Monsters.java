@@ -11,6 +11,7 @@ public class Monsters {
     private final LinkedList<Monster> monsters = new LinkedList<>();
     private final List<Monster> safeMonsters = Collections.unmodifiableList(monsters);
     private final Random rand = new Random();
+    private final ClockModel clock = new ClockModel();
 
     /** DotChangeListener. */
     public interface MonstersChangeListener {
@@ -44,7 +45,9 @@ public class Monsters {
      */
     public void addMonster(float x1, float v, float x, float y, int color, int diameter,
                            int numLives) {
-        monsters.add(new Monster(x, y, color, diameter, numLives, this));
+        Monster monster = new Monster(x, y, color, diameter, numLives, this);
+        clock.addListener(monster);
+        monsters.add(monster);
         notifyListener();
     }
 
@@ -52,6 +55,7 @@ public class Monsters {
     //might not need this method
     public void clearMonsters() {
         monsters.clear();
+        clock.clear();
         notifyListener();
     }
 
