@@ -81,24 +81,7 @@ public final class Monster implements ClockListener {
 
         System.out.println("tick");
     }
-    public void TimerTracker()
-    {
-        Handler timerHandler = new Handler();
-        Runnable timerRunnable = new Runnable() {
-            @Override
-            public void run() {//run the timer
-                long millaseconds = System.currentTimeMillis() - startTime;
-                int seconds = (int) (millaseconds / 1000);
-                seconds = seconds % 60;
-                timerHandler.postDelayed(this, 500);
-                track_sec=seconds;
-                System.out.println(seconds);
-            }
-        };
-        startTime= System.currentTimeMillis();
-        timerHandler.postDelayed(timerRunnable, 0);
 
-    }
     public boolean update (int seconds)
     {
         if (seconds >= track_sec)

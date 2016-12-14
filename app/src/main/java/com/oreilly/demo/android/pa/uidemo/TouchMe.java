@@ -13,6 +13,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 
+import com.oreilly.demo.android.pa.uidemo.model.Board;
 import com.oreilly.demo.android.pa.uidemo.view.MonsterView;
 import com.oreilly.demo.android.pa.uidemo.model.Monster;
 import com.oreilly.demo.android.pa.uidemo.model.Monsters;
@@ -74,7 +75,7 @@ public class TouchMe extends Activity
 
     /** The application model */
     private final Monsters monsterModel = new Monsters();
-
+    private Board boardModel;
 
     /** The application view */
     private MonsterView monsterView;
@@ -91,6 +92,15 @@ public class TouchMe extends Activity
 
         monsterView = (MonsterView) findViewById(R.id.monsters);
         monsterView.setDots(monsterModel);
+
+        //sets board according to dpi
+        DisplayMetrics metrics = getResources().getDisplayMetrics();
+        int n = Math.round(4 * metrics.widthPixels / metrics.xdpi);
+        //needs some more work
+        int m = Math.round(4 * (metrics.heightPixels - 250) / metrics.ydpi);
+        boardModel = new Board(n, m);
+
+        monsterView.setBoard(boardModel);
 
         monsterView.setOnCreateContextMenuListener(this);
         monsterView.setOnTouchListener(new TrackingTouchListener(monsterModel));
