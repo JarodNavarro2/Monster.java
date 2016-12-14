@@ -15,7 +15,7 @@ public final class Monster implements ClockListener {
     private boolean moving;
     private Monsters monsters;
     private long startTime;
-    private int track_sec;
+    private int track_sec = 0;
     /**
      * @param x horizontal coordinate.
      * @param y vertical coordinate.

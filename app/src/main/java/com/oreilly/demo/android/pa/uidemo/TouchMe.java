@@ -56,8 +56,8 @@ public class TouchMe extends Activity
             float size = Math.min(x,y);
             float offsetx = (touchX - board1.getN()* size)/2;
             float offsety = (touchY - board1.getM()*size)/2;
-            touchX = DOT_DIAMETER + offsetx; // I think here is where it goes wrong
-            touchY = DOT_DIAMETER + offsety;
+            touchX = touchX - offsetx;
+            touchY = touchY - offsety;
              //int getRowColumnIndex(float xCoord, float yCoord) //TODO: need to get what hypothetical row/column the event is in
                                    //TODO: and then update the monster that is in the grid cell
                                    //TODO: based off of that cell.
@@ -228,11 +228,11 @@ public class TouchMe extends Activity
      */
     void makeDot(final Monsters monsters, final MonsterView view, final int color) { //// TODO: making of "Monsters" v1
         final int pad = (DOT_DIAMETER + 2) * 2;
-        monsters.addMonster(
+        monsters.addMonster(1,1,
                 DOT_DIAMETER + (rand.nextFloat() * (view.getWidth() - pad)),
                 DOT_DIAMETER + (rand.nextFloat() * (view.getHeight() - pad)),
-                color,
-                DOT_DIAMETER, 1, 2, 3);
+                color, DOT_DIAMETER, 2);
+
     }
     void moveDots(final Monsters monsters, final MonsterView view) {
         final int pad = (DOT_DIAMETER + 2) * 2;
