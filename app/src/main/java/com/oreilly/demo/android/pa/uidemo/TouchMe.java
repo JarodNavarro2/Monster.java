@@ -42,22 +42,15 @@ public class TouchMe extends Activity
     private static final class TrackingTouchListener implements View.OnTouchListener {
         private static MonsterView monsterView;
         private final Monsters mMonsters;
-        private final Board board1 = null;
         final int pad = (DOT_DIAMETER + 2) * 2;
         TrackingTouchListener(final Monsters monsters) { mMonsters = monsters; }
 
         @Override public boolean onTouch(final View v, final MotionEvent evt) {
-            monsterView.getBoard(board1);// gets the board so that we can get N and M so figure the offset of the board.
             int action = evt.getAction();
             float touchX = evt.getX();  // I changed this to the one above
             float touchY = evt.getY();
-            float x = evt.getX()/ board1.getN();
-            float y = evt.getY()/board1.getM();
-            float size = Math.min(x,y);
-            float offsetx = (touchX - board1.getN()* size)/2;
-            float offsety = (touchY - board1.getM()*size)/2;
-            touchX = touchX - offsetx;
-            touchY = touchY - offsety;
+            touchX = Math.round((touchX/DOT_DIAMETER)-0.5);
+            touchY = Math.round((touchY/DOT_DIAMETER)-0.5);
              //int getRowColumnIndex(float xCoord, float yCoord) //TODO: need to get what hypothetical row/column the event is in
                                    //TODO: and then update the monster that is in the grid cell
                                    //TODO: based off of that cell.
@@ -74,7 +67,7 @@ public class TouchMe extends Activity
                     //getting the height and width of the screen and dividing into, say 3 rows, 3 columns
                     //then from there you can determine the range that the cell will occupy (think in
                     //terms of a box) Get height and width of view
-                    for (Monster m : mMonsters.getMonsters()) {
+                   for (Monster m : mMonsters.getMonsters()) {
                         if (getRowColumnIndex(touchX, touchY) == getRowColumnIndex(m.getX(), m.getY())) {
                             m.handleTouchEvent();
                         }
