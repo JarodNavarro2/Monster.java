@@ -62,6 +62,8 @@ public class MonsterView extends View {
 
     public void setBoard(final Board board) { this.board = board; }
 
+    public Board getBoard(final Board board) { return board;}
+
     /**
      * @see android.view.View#onDraw(android.graphics.Canvas)
      */

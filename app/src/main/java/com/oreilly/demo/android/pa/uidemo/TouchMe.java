@@ -42,17 +42,22 @@ public class TouchMe extends Activity
     private static final class TrackingTouchListener implements View.OnTouchListener {
         private static MonsterView monsterView;
         private final Monsters mMonsters;
+        private final Board board1 = null;
         final int pad = (DOT_DIAMETER + 2) * 2;
         TrackingTouchListener(final Monsters monsters) { mMonsters = monsters; }
 
         @Override public boolean onTouch(final View v, final MotionEvent evt) {
+            monsterView.getBoard(board1);// gets the board so that we can get N and M so figure the offset of the board.
             int action = evt.getAction();
-             float touchX = DOT_DIAMETER + (evt.getX() * (v.getWidth() - pad)); // idk if this is right
-             float touchY = DOT_DIAMETER + (evt.getY() * (v.getWidth() - pad));
-           /* float touchX = evt.getX()/dpWidth;  // I changed this to the one above
-            float touchY = evt.getY()/dpHeight;
-            touchX = Math.round(touchX);
-            touchY = Math.round(touchY);*/
+            float touchX = evt.getX();  // I changed this to the one above
+            float touchY = evt.getY();
+            float x = evt.getX()/ board1.getN();
+            float y = evt.getY()/board1.getM();
+            float size = Math.min(x,y);
+            float offsetx = (touchX - board1.getN()* size)/2;
+            float offsety = (touchY - board1.getM()*size)/2;
+            touchX = DOT_DIAMETER + offsetx; // I think here is where it goes wrong
+            touchY = DOT_DIAMETER + offsety;
              //int getRowColumnIndex(float xCoord, float yCoord) //TODO: need to get what hypothetical row/column the event is in
                                    //TODO: and then update the monster that is in the grid cell
                                    //TODO: based off of that cell.
