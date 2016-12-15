@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.util.DisplayMetrics;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -47,10 +48,8 @@ public class TouchMe extends Activity
 
         @Override public boolean onTouch(final View v, final MotionEvent evt) {
             int action = evt.getAction();
-            float touchX = evt.getX();  // I changed this to the one above
-            float touchY = evt.getY();
-            touchX = Math.round((touchX/DOT_DIAMETER)-0.5);
-            touchY = Math.round((touchY/DOT_DIAMETER)-0.5);
+            float touchX = Math.round((evt.getX()/DOT_DIAMETER)-0.5);  // I changed this to the one above
+            float touchY = Math.round((evt.getY()/DOT_DIAMETER)-0.5);
              //int getRowColumnIndex(float xCoord, float yCoord) //TODO: need to get what hypothetical row/column the event is in
                                    //TODO: and then update the monster that is in the grid cell
                                    //TODO: based off of that cell.
@@ -124,12 +123,27 @@ public class TouchMe extends Activity
         monsterView.setOnTouchListener(new TrackingTouchListener(monsterModel));
 
         monsterModel.setMonstersChangeListener((final Monsters monsters) -> monsterView.invalidate());
-
-        runOnUiThread(() -> {
-            for (int i = 0; i < 1; i++) {
-                makeDot(monsterModel, monsterView, Color.GREEN);
-                System.out.println("Populating board");
+        monsterView.setOnKeyListener((final View v, final int keyCode, final KeyEvent event) -> {
+            if (KeyEvent.ACTION_DOWN != event.getAction()) {
+                return false;
             }
+
+            int color;
+            switch (keyCode) {
+                case KeyEvent.KEYCODE_SPACE:
+                    color = Color.MAGENTA;
+                    break;
+                case KeyEvent.KEYCODE_ENTER:
+                    color = Color.BLUE;
+                    break;
+                default:
+                    return false;
+            }
+            for (int i = 0; i < 3; i++) {
+                makeDot(monsterModel, monsterView, Color.GREEN);
+                System.out.println("DOT MADE");
+            }
+            return true;
         });
 
         // wire up the controller
@@ -155,6 +169,7 @@ public class TouchMe extends Activity
         super.onResume();
         if (dotGenerator == null) {
             dotGenerator = new Timer();
+            final int[] count = {0};
             // generate new dots, one every two seconds
             dotGenerator.schedule(new TimerTask() {
                 @Override
@@ -163,9 +178,13 @@ public class TouchMe extends Activity
                     // ConcurrentModificationException on list of dots
                     runOnUiThread(() ->
                     {
+                        if (count[0] < 3) {
+                            makeDot(monsterModel, monsterView, Color.GREEN);
+                        }
                         moveDots(monsterModel, monsterView);
-                        makeDot(monsterModel, monsterView, Color.GREEN);
                         changeColors(monsterModel);
+                        System.out.println("DOING THIS");
+                        System.out.println(count[0]++);
                     });
                 }
             }, /*initial delay*/ 0, /*periodic delay*/ 2000);
@@ -227,7 +246,7 @@ public class TouchMe extends Activity
                 DOT_DIAMETER + (rand.nextFloat() * (view.getWidth() - pad)),
                 DOT_DIAMETER + (rand.nextFloat() * (view.getHeight() - pad)),
                 color, DOT_DIAMETER, 2);
-
+        view.invalidate();
     }
     void moveDots(final Monsters monsters, final MonsterView view) {
         final int pad = (DOT_DIAMETER + 2) * 2;
@@ -235,6 +254,7 @@ public class TouchMe extends Activity
             monster.setX(DOT_DIAMETER + (rand.nextFloat() * (view.getWidth() - pad)));
             monster.setY(DOT_DIAMETER + (rand.nextFloat() * (view.getWidth() - pad)));
         }
+        view.invalidate();
     }
 
     void changeColors(final Monsters monsters) {

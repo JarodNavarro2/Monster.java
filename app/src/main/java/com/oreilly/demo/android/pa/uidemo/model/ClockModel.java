@@ -1,6 +1,7 @@
 package com.oreilly.demo.android.pa.uidemo.model;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -14,11 +15,12 @@ public class ClockModel {
 
     public ClockModel() {
         recurring = new Timer();
-
+        Iterator<ClockListener> it = listeners.iterator();
         recurring.schedule(new TimerTask(){
             @Override
             public void run(){
-                for (ClockListener listener: listeners) {
+                while (it.hasNext()) {
+                    ClockListener listener = it.next();
                     listener.handleClockEvent();
                 }
             }
