@@ -21,6 +21,7 @@ import com.oreilly.demo.android.pa.uidemo.model.Monster;
 import com.oreilly.demo.android.pa.uidemo.model.Monsters;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 import java.util.Timer;
@@ -67,11 +68,7 @@ public class TouchMe extends Activity
                     //getting the height and width of the screen and dividing into, say 3 rows, 3 columns
                     //then from there you can determine the range that the cell will occupy (think in
                     //terms of a box) Get height and width of view
-                   for (Monster m : mMonsters.getMonsters()) {
-                        if (getRowColumnIndex(touchX, touchY) == getRowColumnIndex(m.getX(), m.getY())) {
-                            m.handleTouchEvent();
-                        }
-                    }
+                    mMonsters.getLastMonster().handleTouchEvent(); //handleTouchEvent works
                     break;
                 default:
                     return false;
@@ -79,13 +76,16 @@ public class TouchMe extends Activity
             return true;
         }
 
-        Pair<Float, Float> getRowColumnIndex(float xCoord, float yCoord){
+        //public static boolean getRowColumnIndex(float xCoord, float yCoord) {
+
+        //}
+        /*Pair<Float, Float> getRowColumnIndex(float xCoord, float yCoord){
 
             float val1 = xCoord;
             float val2 = yCoord;
             return new Pair<>(val1, val2);
 
-        }
+        }*/
     }
 
     private final Random rand = new Random();
@@ -184,7 +184,7 @@ public class TouchMe extends Activity
                         moveDots(monsterModel, monsterView);
                         changeColors(monsterModel);
                         System.out.println("DOING THIS");
-                        System.out.println(count[0]++);
+                        count[0]++;
                     });
                 }
             }, /*initial delay*/ 0, /*periodic delay*/ 2000);
