@@ -59,6 +59,7 @@ public class TouchMe extends Activity
             switch(action & MotionEvent.ACTION_MASK) {
                 case MotionEvent.ACTION_DOWN:
                 case MotionEvent.ACTION_POINTER_DOWN:
+                    System.out.println("HERE");
                     //if (getRowColumnIndex(float touchX, float touchY) == getRowColumnIndex(float monster.x, float monster.y)
                     //if the touch event coordinates are in the same cell as the monster && the monster
                     //is in the vulenerable state (which gets handled by the handleTouch event method
@@ -125,8 +126,9 @@ public class TouchMe extends Activity
         monsterModel.setMonstersChangeListener((final Monsters monsters) -> monsterView.invalidate());
 
         runOnUiThread(() -> {
-            for (int i = 0; i < 3; i++) {
+            for (int i = 0; i < 1; i++) {
                 makeDot(monsterModel, monsterView, Color.GREEN);
+                System.out.println("Populating board");
             }
         });
 
@@ -143,7 +145,7 @@ public class TouchMe extends Activity
         monsterModel.setMonstersChangeListener((final Monsters monsters) -> {
             final Monster d = monsters.getLastMonster();
             //tb1.setText((null == d) ? "" : String.valueOf(d.getX()));
-            tb2.setText((null == d) ? "" : String.valueOf(d.getY()));
+            //tb2.setText((null == d) ? "" : String.valueOf(d.getY()));
             monsterView.invalidate();
         });
     }
@@ -162,7 +164,7 @@ public class TouchMe extends Activity
                     runOnUiThread(() ->
                     {
                         moveDots(monsterModel, monsterView);
-                        //makeDot(monsterModel, monsterView, Color.GREEN);
+                        makeDot(monsterModel, monsterView, Color.GREEN);
                         changeColors(monsterModel);
                     });
                 }

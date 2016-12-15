@@ -68,7 +68,7 @@ public final class Monster implements ClockListener {
 
         if (vulnerable) { //vulnerable or not
             numLives--;
-
+            System.out.println("Decreasing lives");
         }
         if (numLives == 0) {
             monsters.removeMonster(this);
@@ -79,9 +79,9 @@ public final class Monster implements ClockListener {
                                      //TODO: If it is moving, set it to false. then repeat NEEDED
         if (!moving) {
             moving = true;
-
+        } else {
+            moving = false;
         }
-
         System.out.println("tick");
     }
 
